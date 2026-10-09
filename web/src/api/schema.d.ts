@@ -4,6 +4,248 @@
  */
 
 export interface paths {
+    "/api/v1/admin/branches/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_branches_list"];
+        put?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        post: operations["admin_branches_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/branches/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_branches_retrieve"];
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        put: operations["admin_branches_update"];
+        post?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        delete: operations["admin_branches_destroy"];
+        options?: never;
+        head?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        patch: operations["admin_branches_partial_update"];
+        trace?: never;
+    };
+    "/api/v1/admin/branches/{id}/toggle-status/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        post: operations["admin_branches_toggle_status_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/courses/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_courses_list"];
+        put?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        post: operations["admin_courses_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/courses/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_courses_retrieve"];
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        put: operations["admin_courses_update"];
+        post?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        delete: operations["admin_courses_destroy"];
+        options?: never;
+        head?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        patch: operations["admin_courses_partial_update"];
+        trace?: never;
+    };
+    "/api/v1/admin/dashboard/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["admin_dashboard_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/departments/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_departments_list"];
+        put?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        post: operations["admin_departments_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/departments/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_departments_retrieve"];
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        put: operations["admin_departments_update"];
+        post?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        delete: operations["admin_departments_destroy"];
+        options?: never;
+        head?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        patch: operations["admin_departments_partial_update"];
+        trace?: never;
+    };
     "/api/v1/auth/login/": {
         parameters: {
             query?: never;
@@ -72,6 +314,87 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        Branch: {
+            /** Format: uuid */
+            readonly id: string;
+            name: string;
+            code: string;
+            city: string;
+            address: string;
+            contact_number: string;
+            status?: components["schemas"]["StatusEnum"];
+            /** @default 0 */
+            readonly students_count: number;
+            /** Format: date-time */
+            readonly created_at: string;
+        };
+        BranchCount: {
+            code: string;
+            name: string;
+            status: string;
+            students_count: number;
+        };
+        BranchRequest: {
+            name: string;
+            code: string;
+            city: string;
+            address: string;
+            contact_number: string;
+            status?: components["schemas"]["StatusEnum"];
+        };
+        Course: {
+            /** Format: uuid */
+            readonly id: string;
+            code: string;
+            title: string;
+            credit_hours: number;
+            /** Format: uuid */
+            department: string;
+            readonly department_name: string;
+            status?: components["schemas"]["StatusEnum"];
+            /** @default 0 */
+            readonly slots_count: number;
+            /** @default 0 */
+            readonly assignments_count: number;
+        };
+        CourseRequest: {
+            code: string;
+            title: string;
+            credit_hours: number;
+            /** Format: uuid */
+            department: string;
+            status?: components["schemas"]["StatusEnum"];
+        };
+        Dashboard: {
+            totals: components["schemas"]["Totals"];
+            datesheets: components["schemas"]["Datesheets"];
+            assignment_incomplete: number;
+            pending_requests: number;
+            students_per_branch: components["schemas"]["BranchCount"][];
+            requests_by_status: components["schemas"]["StatusCount"][];
+            saved_per_day: components["schemas"]["DayCount"][];
+        };
+        Datesheets: {
+            saved: number;
+            not_saved: number;
+        };
+        DayCount: {
+            /** Format: date */
+            date: string;
+            count: number;
+        };
+        Department: {
+            /** Format: uuid */
+            readonly id: string;
+            name: string;
+            code: string;
+            /** @default 0 */
+            readonly courses_count: number;
+        };
+        DepartmentRequest: {
+            name: string;
+            code: string;
+        };
         FlowState: {
             has_branch: boolean;
             needs_branch_selection: boolean;
@@ -101,6 +424,64 @@ export interface components {
             name: string;
             flow: components["schemas"]["FlowState"] | null;
         };
+        PaginatedBranchList: {
+            results: components["schemas"]["Branch"][];
+            count: number;
+            page: number;
+            page_size: number;
+            total_pages: number;
+        };
+        PaginatedCourseList: {
+            results: components["schemas"]["Course"][];
+            count: number;
+            page: number;
+            page_size: number;
+            total_pages: number;
+        };
+        PaginatedDepartmentList: {
+            results: components["schemas"]["Department"][];
+            count: number;
+            page: number;
+            page_size: number;
+            total_pages: number;
+        };
+        PatchedBranchRequest: {
+            name?: string;
+            code?: string;
+            city?: string;
+            address?: string;
+            contact_number?: string;
+            status?: components["schemas"]["StatusEnum"];
+        };
+        PatchedCourseRequest: {
+            code?: string;
+            title?: string;
+            credit_hours?: number;
+            /** Format: uuid */
+            department?: string;
+            status?: components["schemas"]["StatusEnum"];
+        };
+        PatchedDepartmentRequest: {
+            name?: string;
+            code?: string;
+        };
+        StatusCount: {
+            status: string;
+            label: string;
+            count: number;
+        };
+        /**
+         * @description * `active` - Active
+         *     * `inactive` - Inactive
+         * @enum {string}
+         */
+        StatusEnum: "active" | "inactive";
+        Totals: {
+            students: number;
+            active_branches: number;
+            active_courses: number;
+            upcoming_slots: number;
+        };
     };
     responses: never;
     parameters: never;
@@ -110,6 +491,514 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    admin_branches_list: {
+        parameters: {
+            query?: {
+                /** @description Which field to use when ordering the results. */
+                ordering?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                page_size?: number;
+                /** @description A search term. */
+                search?: string;
+                /**
+                 * @description * `active` - Active
+                 *     * `inactive` - Inactive
+                 */
+                status?: "active" | "inactive";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedBranchList"];
+                };
+            };
+        };
+    };
+    admin_branches_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BranchRequest"];
+                "multipart/form-data": components["schemas"]["BranchRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["BranchRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Branch"];
+                };
+            };
+        };
+    };
+    admin_branches_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this branch. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Branch"];
+                };
+            };
+        };
+    };
+    admin_branches_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this branch. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BranchRequest"];
+                "multipart/form-data": components["schemas"]["BranchRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["BranchRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Branch"];
+                };
+            };
+        };
+    };
+    admin_branches_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this branch. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    admin_branches_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this branch. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedBranchRequest"];
+                "multipart/form-data": components["schemas"]["PatchedBranchRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedBranchRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Branch"];
+                };
+            };
+        };
+    };
+    admin_branches_toggle_status_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this branch. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Branch"];
+                };
+            };
+        };
+    };
+    admin_courses_list: {
+        parameters: {
+            query?: {
+                department?: string;
+                /** @description Which field to use when ordering the results. */
+                ordering?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                page_size?: number;
+                /** @description A search term. */
+                search?: string;
+                /**
+                 * @description * `active` - Active
+                 *     * `inactive` - Inactive
+                 */
+                status?: "active" | "inactive";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedCourseList"];
+                };
+            };
+        };
+    };
+    admin_courses_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CourseRequest"];
+                "multipart/form-data": components["schemas"]["CourseRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["CourseRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Course"];
+                };
+            };
+        };
+    };
+    admin_courses_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this course. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Course"];
+                };
+            };
+        };
+    };
+    admin_courses_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this course. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CourseRequest"];
+                "multipart/form-data": components["schemas"]["CourseRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["CourseRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Course"];
+                };
+            };
+        };
+    };
+    admin_courses_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this course. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    admin_courses_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this course. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedCourseRequest"];
+                "multipart/form-data": components["schemas"]["PatchedCourseRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedCourseRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Course"];
+                };
+            };
+        };
+    };
+    admin_dashboard_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Dashboard"];
+                };
+            };
+        };
+    };
+    admin_departments_list: {
+        parameters: {
+            query?: {
+                /** @description Which field to use when ordering the results. */
+                ordering?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                page_size?: number;
+                /** @description A search term. */
+                search?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedDepartmentList"];
+                };
+            };
+        };
+    };
+    admin_departments_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DepartmentRequest"];
+                "multipart/form-data": components["schemas"]["DepartmentRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["DepartmentRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Department"];
+                };
+            };
+        };
+    };
+    admin_departments_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this department. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Department"];
+                };
+            };
+        };
+    };
+    admin_departments_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this department. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DepartmentRequest"];
+                "multipart/form-data": components["schemas"]["DepartmentRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["DepartmentRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Department"];
+                };
+            };
+        };
+    };
+    admin_departments_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this department. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    admin_departments_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this department. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedDepartmentRequest"];
+                "multipart/form-data": components["schemas"]["PatchedDepartmentRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedDepartmentRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Department"];
+                };
+            };
+        };
+    };
     auth_login_create: {
         parameters: {
             query?: never;
