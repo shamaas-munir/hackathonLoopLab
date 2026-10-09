@@ -1,8 +1,7 @@
-"""Admin dashboard route (S2). Mounted at /api/v1/admin/ — add 'dashboard/'."""
+"""Admin dashboard route (S2). Mounted at /api/v1/admin/."""
 
-from django.urls import path  # noqa: F401
-from rest_framework.routers import SimpleRouter
+from django.urls import path
 
-router = SimpleRouter(trailing_slash=True)
+from .views import DashboardView
 
-urlpatterns: list = [*router.urls]
+urlpatterns = [path("dashboard/", DashboardView.as_view(), name="admin-dashboard")]
