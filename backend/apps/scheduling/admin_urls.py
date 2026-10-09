@@ -1,8 +1,10 @@
-"""Admin exam slot routes (S4). Mounted at /api/v1/admin/ — register 'slots'."""
+"""Admin exam slot routes (S4). Mounted at /api/v1/admin/."""
 
-from django.urls import path  # noqa: F401
 from rest_framework.routers import SimpleRouter
 
+from apps.scheduling.admin_views import AdminSlotViewSet
+
 router = SimpleRouter(trailing_slash=True)
+router.register("slots", AdminSlotViewSet, basename="admin-slots")
 
 urlpatterns: list = [*router.urls]
