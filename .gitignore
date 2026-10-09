@@ -7,3 +7,6 @@ docs/REQUESTS_FOR_INTEGRATOR.md
 SYSTEM_DESIGN.md
 # Secrets
 .env
+
+# Claude Code agent worktrees
+.claude/
