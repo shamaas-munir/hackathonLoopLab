@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { EmptyState } from "@/components/shared/EmptyState";
-import { PageHeader } from "@/components/shared/PageHeader";
+import { Suspense } from "react";
+import { PageSkeleton } from "@/components/shared/PageSkeleton";
+import { StudentDetailView } from "@/features/students/StudentDetailView";
 
 export const metadata: Metadata = { title: "Student details" };
 
-export default function StudentDetailsPage() {
+export default function StudentDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   return (
-    <>
-      <PageHeader title="Student details" />
-      <EmptyState title="Coming soon" description="This page is being built." />
-    </>
+    <Suspense fallback={<PageSkeleton />}>
+      <StudentDetailView params={params} />
+    </Suspense>
   );
 }

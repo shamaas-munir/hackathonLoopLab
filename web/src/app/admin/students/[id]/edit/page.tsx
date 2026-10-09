@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
-import { EmptyState } from "@/components/shared/EmptyState";
+import { Suspense } from "react";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { PageSkeleton } from "@/components/shared/PageSkeleton";
+import { EditStudent } from "@/features/students/EditStudent";
 
 export const metadata: Metadata = { title: "Edit student" };
 
-export default function EditStudentPage() {
+export default function EditStudentPage({ params }: { params: Promise<{ id: string }> }) {
   return (
     <>
       <PageHeader title="Edit student" />
-      <EmptyState title="Coming soon" description="This page is being built." />
+      <Suspense fallback={<PageSkeleton />}>
+        <EditStudent params={params} />
+      </Suspense>
     </>
   );
 }
