@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { EmptyState } from "@/components/shared/EmptyState";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { AssignmentsTable } from "@/features/assignments/AssignmentsTable";
 
 export const metadata: Metadata = { title: "Assignments" };
 
@@ -8,10 +8,10 @@ export default function AssignmentsPage() {
   return (
     <>
       <PageHeader
-        title="Assignments"
-        description="Courses assigned to each student."
+        title="Course assignments"
+        description="Every student needs 4 to 6 courses before choosing a date sheet."
       />
-      <EmptyState title="Coming soon" description="This page is being built." />
+      <AssignmentsTable />
     </>
   );
 }
