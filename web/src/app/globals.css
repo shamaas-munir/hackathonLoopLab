@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-sky: var(--sky);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-danger: var(--danger);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --shadow-sm: 0 1px 2px 0 rgb(30 42 59 / 0.04), 0 1px 3px 0 rgb(30 42 59 / 0.04);
+  --shadow-md: 0 4px 12px -2px rgb(30 42 59 / 0.08);
+}
+
+:root {
+  --radius: 0.5rem;
+  --background: #f4f7fb;
+  --foreground: #1e2a3b;
+  --card: #ffffff;
+  --card-foreground: #1e2a3b;
+  --popover: #ffffff;
+  --popover-foreground: #1e2a3b;
+  --primary: #3b6fd4;
+  --primary-hover: #2f5db8;
+  --primary-foreground: #ffffff;
+  --primary-soft: #e6eefb;
+  --secondary: #eef3fa;
+  --secondary-foreground: #1e2a3b;
+  --muted: #eef3fa;
+  --muted-foreground: #5b6b80;
+  --accent: #e6eefb;
+  --accent-foreground: #1e2a3b;
+  --destructive: #d9534f;
+  --danger: #d9534f;
+  --success: #2e9e6b;
+  --warning: #d99a2b;
+  --sky: #5aa9e6;
+  --border: #dce5f0;
+  --input: #dce5f0;
+  --ring: #9db8ec;
+  --chart-1: #3b6fd4;
+  --chart-2: #5aa9e6;
+  --chart-3: #2e9e6b;
+  --chart-4: #d99a2b;
+  --chart-5: #d9534f;
+}
+
+.dark {
+  --background: #0e1626;
+  --foreground: #e3eaf5;
+  --card: #142036;
+  --card-foreground: #e3eaf5;
+  --popover: #142036;
+  --popover-foreground: #e3eaf5;
+  --primary: #7da6f0;
+  --primary-hover: #9bbcf4;
+  --primary-foreground: #0e1626;
+  --primary-soft: #1c2c4a;
+  --secondary: #1a2943;
+  --secondary-foreground: #e3eaf5;
+  --muted: #1a2943;
+  --muted-foreground: #93a3ba;
+  --accent: #1c2c4a;
+  --accent-foreground: #e3eaf5;
+  --destructive: #ec7a76;
+  --danger: #ec7a76;
+  --success: #4cc38a;
+  --warning: #e8b24f;
+  --sky: #7cc0f0;
+  --border: #24344f;
+  --input: #2b3d5c;
+  --ring: #3e5f9e;
+  --chart-1: #7da6f0;
+  --chart-2: #7cc0f0;
+  --chart-3: #4cc38a;
+  --chart-4: #e8b24f;
+  --chart-5: #ec7a76;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .dark {
+    color-scheme: light;
+  }
+}
