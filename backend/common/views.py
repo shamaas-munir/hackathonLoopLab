@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import viewsets
 
 from common import audit
@@ -16,14 +17,17 @@ class AdminModelViewSet(viewsets.ModelViewSet):
     pagination_class = StandardPagination
     http_method_names = ["get", "post", "put", "patch", "delete", "head", "options"]
 
+    @transaction.atomic
     def perform_create(self, serializer):
         instance = serializer.save()
         audit.log_audit(self.request.user, audit.CREATE, instance)
 
+    @transaction.atomic
     def perform_update(self, serializer):
         instance = serializer.save()
         audit.log_audit(self.request.user, audit.UPDATE, instance, {"fields": sorted(serializer.validated_data)})
 
+    @transaction.atomic
     def perform_destroy(self, instance):
-        audit.log_audit(self.request.user, audit.DELETE, str(instance), {"id": str(instance.pk)})
+        audit.log_audit(self.request.user, audit.DELETE, instance)
         instance.delete()

@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "gen:api": "openapi-typescript http://127.0.0.1:8000/api/v1/schema/ -o src/api/schema.d.ts"
+    "gen:api": "cd ../backend && uv run python manage.py spectacular --file ../web/openapi.tmp.yml && cd ../web && openapi-typescript openapi.tmp.yml -o src/api/schema.d.ts && node -e \"require('fs').unlinkSync('openapi.tmp.yml')\""
   },
   "dependencies": {
     "@hookform/resolvers": "^5.9.1",

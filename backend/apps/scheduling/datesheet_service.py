@@ -174,9 +174,7 @@ def _apply_seat_changes(old: list[DatesheetSelection], new_slots: list[ExamSlot]
 def save_datesheet(student: Student, selections: list[dict]) -> None:
     with transaction.atomic():
         student = Student.objects.select_for_update(of=("self",)).select_related("user", "branch").get(pk=student.pk)
-        assigned = dict(
-            CourseAssignment.objects.filter(student=student).values_list("course_id", "course__code")
-        )
+        assigned = dict(CourseAssignment.objects.filter(student=student).values_list("course_id", "course__code"))
         _require_ready(student, len(assigned))
         if student.datesheet_saved_at and not student.datesheet_unlocked:
             raise AppError(

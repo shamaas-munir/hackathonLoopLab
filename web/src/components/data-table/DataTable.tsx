@@ -1,6 +1,10 @@
 "use client";
 
-import { keepPreviousData, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   ArrowDown,
   ArrowUp,
@@ -93,10 +97,14 @@ export function useInvalidateList(queryKey: readonly unknown[]) {
   return () => queryClient.invalidateQueries({ queryKey });
 }
 
-export function DataTable<T extends { id: string | number }>(props: DataTableProps<T>) {
+export function DataTable<T extends { id: string | number }>(
+  props: DataTableProps<T>,
+) {
   // useSearchParams needs a Suspense boundary under Cache Components.
   return (
-    <Suspense fallback={<ListSkeleton rows={5} columns={props.columns.length} />}>
+    <Suspense
+      fallback={<ListSkeleton rows={5} columns={props.columns.length} />}
+    >
       <DataTableInner {...props} />
     </Suspense>
   );
@@ -140,7 +148,12 @@ function DataTableInner<T extends { id: string | number }>({
     return () => clearTimeout(timer);
   }, [searchInput, search, setParams]);
 
-  const baseQs = toQueryString({ page_size: pageSize, search, ordering, ...list.filters });
+  const baseQs = toQueryString({
+    page_size: pageSize,
+    search,
+    ordering,
+    ...list.filters,
+  });
   const query = useQuery({
     queryKey: [...queryKey, baseQs, page],
     queryFn: () => apiGet<Paginated<T>>(`${endpoint}${baseQs}&page=${page}`),
@@ -154,30 +167,43 @@ function DataTableInner<T extends { id: string | number }>({
     if (settled && page < totalPages) {
       void queryClient.prefetchQuery({
         queryKey: [...queryKey, baseQs, page + 1],
-        queryFn: () => apiGet<Paginated<T>>(`${endpoint}${baseQs}&page=${page + 1}`),
+        queryFn: () =>
+          apiGet<Paginated<T>>(`${endpoint}${baseQs}&page=${page + 1}`),
       });
     }
   }, [queryClient, queryKey, baseQs, endpoint, page, totalPages, settled]);
 
   // After a delete the current page can disappear: step back to the last one.
   useEffect(() => {
-    if (settled && totalPages > 0 && page > totalPages) setParams({ page: totalPages });
+    if (settled && totalPages > 0 && page > totalPages)
+      setParams({ page: totalPages });
   }, [settled, page, totalPages, setParams]);
 
   const hasFilters = Object.keys(list.filters).length > 0;
   const clearAll = () => {
     setSearchInput("");
     setPushedSearch("");
-    setParams({ search: null, page: null, ...Object.fromEntries(filters.map((f) => [f.id, null])) });
+    setParams({
+      search: null,
+      page: null,
+      ...Object.fromEntries(filters.map((f) => [f.id, null])),
+    });
   };
   const toggleSort = (field: string) => {
-    const next = ordering === field ? `-${field}` : ordering === `-${field}` ? null : field;
+    const next =
+      ordering === field
+        ? `-${field}`
+        : ordering === `-${field}`
+          ? null
+          : field;
     setParams({ ordering: next ?? defaultOrdering, page: null });
   };
   const setFilter = (id: string, value: string) =>
     setParams({ [id]: value === ALL ? null : value, page: null });
 
-  const showTabs = filtersAs === "tabs" && filters.length === 1;
+  // With filtersAs="tabs", the first filter renders as tabs and any others stay as selects.
+  const showTabs = filtersAs === "tabs" && filters.length > 0;
+  const selectFilters = showTabs ? filters.slice(1) : filters;
 
   return (
     <div className="space-y-4">
@@ -197,26 +223,30 @@ function DataTableInner<T extends { id: string | number }>({
             className="bg-card pl-9"
           />
         </div>
-        {!showTabs &&
-          filters.map((filter) => (
-            <Select
-              key={filter.id}
-              value={list.filters[filter.id] ?? ALL}
-              onValueChange={(v) => setFilter(filter.id, v)}
+        {selectFilters.map((filter) => (
+          <Select
+            key={filter.id}
+            value={list.filters[filter.id] ?? ALL}
+            onValueChange={(v) => setFilter(filter.id, v)}
+          >
+            <SelectTrigger
+              className="w-full bg-card sm:w-auto sm:min-w-40"
+              aria-label={filter.label}
             >
-              <SelectTrigger className="w-full bg-card sm:w-auto sm:min-w-40" aria-label={filter.label}>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent position="popper">
-                <SelectItem value={ALL}>All {filter.label.toLowerCase()}</SelectItem>
-                {filter.options.map((o) => (
-                  <SelectItem key={o.value} value={o.value}>
-                    {o.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          ))}
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent position="popper">
+              <SelectItem value={ALL}>
+                All {filter.label.toLowerCase()}
+              </SelectItem>
+              {filter.options.map((o) => (
+                <SelectItem key={o.value} value={o.value}>
+                  {o.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        ))}
         {toolbarActions && (
           <div className="flex flex-wrap gap-2 sm:ml-auto [&>*]:flex-1 sm:[&>*]:flex-none">
             {toolbarActions}
@@ -225,7 +255,10 @@ function DataTableInner<T extends { id: string | number }>({
       </div>
 
       {showTabs && (
-        <Tabs value={list.filters[filters[0].id] ?? ALL} onValueChange={(v) => setFilter(filters[0].id, v)}>
+        <Tabs
+          value={list.filters[filters[0].id] ?? ALL}
+          onValueChange={(v) => setFilter(filters[0].id, v)}
+        >
           <div className="-mx-1 overflow-x-auto px-1">
             <TabsList aria-label={filters[0].label}>
               <TabsTrigger value={ALL}>All</TabsTrigger>
@@ -241,7 +274,9 @@ function DataTableInner<T extends { id: string | number }>({
 
       {query.isError && !data ? (
         <ErrorState
-          message={query.error instanceof ApiError ? query.error.message : undefined}
+          message={
+            query.error instanceof ApiError ? query.error.message : undefined
+          }
           onRetry={() => void query.refetch()}
         />
       ) : !data ? (
@@ -262,7 +297,10 @@ function DataTableInner<T extends { id: string | number }>({
       ) : (
         <div
           aria-busy={query.isPlaceholderData}
-          className={cn("space-y-4 transition-opacity", query.isPlaceholderData && "opacity-60")}
+          className={cn(
+            "space-y-4 transition-opacity",
+            query.isPlaceholderData && "opacity-60",
+          )}
         >
           <div className="hidden overflow-hidden rounded-xl border bg-card shadow-sm md:block">
             <Table containerClassName="max-h-[70dvh] overflow-auto">
@@ -271,7 +309,11 @@ function DataTableInner<T extends { id: string | number }>({
                   {columns.map((col) => (
                     <TableHead
                       key={col.id}
-                      aria-sort={col.sortField ? ariaSort(ordering, col.sortField) : undefined}
+                      aria-sort={
+                        col.sortField
+                          ? ariaSort(ordering, col.sortField)
+                          : undefined
+                      }
                       className={cn(hideClass(col.hideBelow), col.className)}
                     >
                       {col.sortField ? (
@@ -298,7 +340,11 @@ function DataTableInner<T extends { id: string | number }>({
                     {columns.map((col) => (
                       <TableCell
                         key={col.id}
-                        className={cn("py-3", hideClass(col.hideBelow), col.className)}
+                        className={cn(
+                          "py-3",
+                          hideClass(col.hideBelow),
+                          col.className,
+                        )}
                       >
                         {col.cell(row)}
                       </TableCell>
@@ -316,9 +362,16 @@ function DataTableInner<T extends { id: string | number }>({
 
           <ul className="grid gap-3 md:hidden">
             {data.results.map((row) => (
-              <li key={row.id} className="relative rounded-xl border bg-card p-4 shadow-sm">
+              <li
+                key={row.id}
+                className="relative rounded-xl border bg-card p-4 shadow-sm"
+              >
                 <div className={cn("min-w-0", rowActions && "pr-12")}>
-                  {mobileCard ? mobileCard(row) : <DefaultCard row={row} columns={columns} />}
+                  {mobileCard ? (
+                    mobileCard(row)
+                  ) : (
+                    <DefaultCard row={row} columns={columns} />
+                  )}
                 </div>
                 {rowActions && (
                   <div className="absolute top-2 right-2">
@@ -335,7 +388,9 @@ function DataTableInner<T extends { id: string | number }>({
             count={data.count}
             totalPages={totalPages}
             onPageChange={(p) => setParams({ page: p })}
-            onPageSizeChange={(size) => setParams({ page_size: size, page: null })}
+            onPageSizeChange={(size) =>
+              setParams({ page_size: size, page: null })
+            }
           />
         </div>
       )}
@@ -364,7 +419,12 @@ function SortButton({
   direction: SortDirection;
   onClick: () => void;
 }) {
-  const Icon = direction === "ascending" ? ArrowUp : direction === "descending" ? ArrowDown : ChevronsUpDown;
+  const Icon =
+    direction === "ascending"
+      ? ArrowUp
+      : direction === "descending"
+        ? ArrowDown
+        : ChevronsUpDown;
   return (
     <Button
       variant="ghost"
@@ -388,23 +448,31 @@ function RowActionsMenu({ actions }: { actions: DataTableRowAction[] }) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-40">
-        {actions.map(({ label, icon: Icon, onSelect, destructive, disabled }) => (
-          <DropdownMenuItem
-            key={label}
-            onSelect={onSelect}
-            disabled={disabled}
-            variant={destructive ? "destructive" : "default"}
-          >
-            {Icon && <Icon aria-hidden />}
-            {label}
-          </DropdownMenuItem>
-        ))}
+        {actions.map(
+          ({ label, icon: Icon, onSelect, destructive, disabled }) => (
+            <DropdownMenuItem
+              key={label}
+              onSelect={onSelect}
+              disabled={disabled}
+              variant={destructive ? "destructive" : "default"}
+            >
+              {Icon && <Icon aria-hidden />}
+              {label}
+            </DropdownMenuItem>
+          ),
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
 
-function DefaultCard<T>({ row, columns }: { row: T; columns: DataTableColumn<T>[] }) {
+function DefaultCard<T>({
+  row,
+  columns,
+}: {
+  row: T;
+  columns: DataTableColumn<T>[];
+}) {
   const [first, ...rest] = columns.filter((c) => !c.hideBelow);
   if (!first) return null;
   return (
@@ -415,7 +483,9 @@ function DefaultCard<T>({ row, columns }: { row: T; columns: DataTableColumn<T>[
           {rest.map((col) => (
             <div key={col.id} className="contents">
               <dt className="text-muted-foreground">{col.header}</dt>
-              <dd className="min-w-0 text-right break-words">{col.cell(row)}</dd>
+              <dd className="min-w-0 text-right break-words">
+                {col.cell(row)}
+              </dd>
             </div>
           ))}
         </dl>
@@ -430,7 +500,10 @@ function ListSkeleton({ rows, columns }: { rows: number; columns: number }) {
       <div className="hidden overflow-hidden rounded-xl border bg-card shadow-sm md:block">
         <div className="h-10 border-b bg-muted" />
         {Array.from({ length: rows }, (_, i) => (
-          <div key={i} className="flex h-[53px] items-center gap-4 border-b px-2 last:border-0">
+          <div
+            key={i}
+            className="flex h-[53px] items-center gap-4 border-b px-2 last:border-0"
+          >
             {Array.from({ length: columns }, (_, j) => (
               <Skeleton key={j} className="h-4 flex-1" />
             ))}
@@ -439,7 +512,10 @@ function ListSkeleton({ rows, columns }: { rows: number; columns: number }) {
       </div>
       <div className="grid gap-3 md:hidden">
         {Array.from({ length: Math.min(rows, 4) }, (_, i) => (
-          <div key={i} className="space-y-3 rounded-xl border bg-card p-4 shadow-sm">
+          <div
+            key={i}
+            className="space-y-3 rounded-xl border bg-card p-4 shadow-sm"
+          >
             <Skeleton className="h-5 w-2/3" />
             <Skeleton className="h-4 w-full" />
             <Skeleton className="h-4 w-5/6" />

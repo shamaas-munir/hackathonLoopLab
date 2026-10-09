@@ -2,6 +2,7 @@ from django.contrib.postgres.constraints import ExclusionConstraint
 from django.contrib.postgres.fields import DateTimeRangeField, RangeOperators
 from django.db import models
 from django.db.models import F, Q
+from django.utils import timezone
 
 from common.models import TimeStampedModel
 
@@ -29,7 +30,7 @@ class ExamSlot(TimeStampedModel):
         indexes = [models.Index(fields=["course", "start_at"], name="slot_course_start_idx")]
 
     def __str__(self):
-        return f"{self.course_id} @ {self.start_at:%Y-%m-%d %H:%M}"
+        return f"{self.course.code} @ {timezone.localtime(self.start_at):%Y-%m-%d %H:%M}"
 
 
 class SlotSeat(models.Model):

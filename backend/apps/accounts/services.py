@@ -62,22 +62,15 @@ def request_password_reset(email: str) -> None:
             _send_password_link(user, RESET, "password_reset")
 
 
-def _resolve(uid: str, token: str, purpose: str):
-    try:
-        return resolve_token(uid, token, purpose)
-    except DjangoValidationError:  # uid decodes to something that isn't a UUID
-        return None
-
-
 def validate_link(uid: str, token: str, purpose: str) -> dict:
-    user = _resolve(uid, token, purpose)
+    user = resolve_token(uid, token, purpose)
     if user is None:
         return {"valid": False}
     return {"valid": True, "purpose": purpose, "name": display_name(user), "email": user.email}
 
 
 def set_password(uid: str, token: str, purpose: str, password: str) -> None:
-    user = _resolve(uid, token, purpose)
+    user = resolve_token(uid, token, purpose)
     if user is None:
         raise _link_invalid()
     with transaction.atomic():

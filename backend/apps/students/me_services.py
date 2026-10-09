@@ -1,8 +1,10 @@
 """Student self-service: profile and one-time branch selection (R5, R6, D7, D9)."""
 
+from django.core.cache import cache
 from django.db import transaction
 from django.db.models import F, Q
 
+from apps.branches.apps import ACTIVE_BRANCHES_CACHE_KEY
 from apps.branches.models import Branch
 from apps.scheduling.models import DatesheetSelection
 from apps.scheduling.seats import release_seat, reserve_seat
@@ -12,9 +14,14 @@ from common.models import Status
 from common.time import now
 
 
-def active_branches():
-    return Branch.objects.filter(status=Status.ACTIVE).only(
-        "id", "name", "code", "city", "address", "contact_number"
+def active_branches() -> list[Branch]:
+    """Cached for 5 minutes (read by every student at peak time); cleared whenever a branch changes."""
+    return cache.get_or_set(
+        ACTIVE_BRANCHES_CACHE_KEY,
+        lambda: list(
+            Branch.objects.filter(status=Status.ACTIVE).only("id", "name", "code", "city", "address", "contact_number")
+        ),
+        timeout=300,
     )
 
 

@@ -6,6 +6,7 @@ Tokens are HMAC-signed (nothing stored in the DB). The hash includes the passwor
 
 from django.conf import settings
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from django.core.exceptions import ValidationError
 from django.db.models import F
 from django.utils.crypto import constant_time_compare
 from django.utils.encoding import force_bytes, force_str
@@ -63,6 +64,6 @@ def resolve_token(uidb64: str, token: str, purpose: str):
         return None
     try:
         user = User.objects.get(pk=force_str(urlsafe_base64_decode(uidb64)), is_active=True)
-    except (User.DoesNotExist, ValueError, TypeError, OverflowError):
+    except (User.DoesNotExist, ValueError, TypeError, OverflowError, ValidationError):
         return None
     return user if generator.check_token(user, token) else None
