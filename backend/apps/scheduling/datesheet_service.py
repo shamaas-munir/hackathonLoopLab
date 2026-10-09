@@ -7,7 +7,6 @@ R10 (no overlaps), R11 (unlock is single use), R22 (seat capacity per branch).
 from collections import defaultdict
 from itertools import combinations
 
-from django.conf import settings
 from django.db import transaction
 from django.db.models import F, OuterRef, Q, Subquery
 
@@ -15,7 +14,6 @@ from apps.scheduling.models import DatesheetSelection, ExamSlot, SlotSeat
 from apps.scheduling.seats import release_seat, reserve_seat
 from apps.students.models import CourseAssignment, Student
 from apps.students.state import MAX_COURSES, MIN_COURSES
-from common.emails import queue_email
 from common.exceptions import AppError
 from common.time import is_past, local, now, overlaps, slot_end, slot_range
 
@@ -210,9 +208,4 @@ def save_datesheet(student: Student, selections: list[dict]) -> None:
         )
         Student.objects.filter(pk=student.pk).update(
             datesheet_saved_at=now(), datesheet_unlocked=False, version=F("version") + 1
-        )
-        queue_email(
-            student.user.email,
-            "datesheet_saved",
-            {"name": student.full_name, "link": f"{settings.FRONTEND_URL}/student/datesheet"},
         )

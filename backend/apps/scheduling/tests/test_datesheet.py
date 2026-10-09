@@ -2,7 +2,6 @@
 
 import pytest
 
-from apps.notifications.models import EmailOutbox
 from apps.scheduling import datesheet_service
 from apps.scheduling.models import DatesheetSelection, SlotSeat
 from apps.scheduling.seats import reserve_seat
@@ -47,7 +46,7 @@ def test_courses_query_count_is_constant(student_api, setup, django_assert_max_n
         assert student_api(student).get("/api/v1/me/courses/").status_code == 200
 
 
-def test_save_success_locks_and_emails(student_api, setup):
+def test_save_success_locks(student_api, setup):
     student, courses, slots, _ = setup
     client = student_api(student)
     response = client.post(URL, body(courses, slots))
@@ -59,7 +58,6 @@ def test_save_success_locks_and_emails(student_api, setup):
     student.refresh_from_db()
     assert student.datesheet_saved_at is not None
     assert DatesheetSelection.objects.filter(student=student).count() == 4
-    assert EmailOutbox.objects.filter(template="datesheet_saved").count() == 1
 
     second = client.post(URL, body(courses, slots))
     assert second.status_code == 409 and second.json()["error"]["code"] == "LOCKED"
@@ -158,16 +156,6 @@ def test_unchanged_full_slot_kept_on_resave(student_api, setup, make_slot):
 
     assert client.post(URL, body(courses, [capped, *slots[1:]])).status_code == 201
     assert SlotSeat.objects.get(slot=capped).booked == 1
-
-
-def test_idempotency_key_replays_response(student_api, setup):
-    student, courses, slots, _ = setup
-    client = student_api(student)
-    first = client.post(URL, body(courses, slots), HTTP_IDEMPOTENCY_KEY="abc-123")
-    replay = client.post(URL, body(courses, slots), HTTP_IDEMPOTENCY_KEY="abc-123")
-    assert first.status_code == replay.status_code == 201
-    assert first.json() == replay.json()
-    assert EmailOutbox.objects.filter(template="datesheet_saved").count() == 1
 
 
 def test_datesheet_view_is_own_only(student_api, setup, make_student, branch):

@@ -68,10 +68,147 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/me/branch/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["me_branch_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/branches/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["me_branches_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/courses/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["me_courses_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/datesheet/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["me_datesheet_retrieve"];
+        put?: never;
+        post: operations["me_datesheet_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/profile/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["me_profile_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/requests/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Own requests only, newest first. Not paginated: one pending per type keeps the list short. */
+        get: operations["me_requests_list"];
+        put?: never;
+        /** @description Own requests only, newest first. Not paginated: one pending per type keeps the list short. */
+        post: operations["me_requests_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        Academic: {
+            registration_no: string;
+            program: string;
+            semester: number;
+            /** @description e.g. 2024-2028 */
+            session: string;
+            previous_qualification: string;
+            previous_institute: string;
+            /** Format: decimal */
+            marks_or_cgpa: string;
+        };
+        CourseSlots: {
+            course: components["schemas"]["MyCourse"];
+            slots: components["schemas"]["SlotOption"][];
+            /** Format: uuid */
+            selected_slot: string | null;
+        };
+        Datesheet: {
+            full_name: string;
+            registration_no: string;
+            program: string;
+            semester: number;
+            session: string;
+            branch: components["schemas"]["MyBranch"];
+            /** Format: date-time */
+            saved_at: string;
+            locked: boolean;
+            rows: components["schemas"]["DatesheetRow"][];
+        };
+        DatesheetRow: {
+            course_code: string;
+            course_title: string;
+            credit_hours: number;
+            /** Format: date-time */
+            start_at: string;
+            /** Format: date-time */
+            end_at: string;
+            day: string;
+        };
         FlowState: {
             has_branch: boolean;
             needs_branch_selection: boolean;
@@ -82,6 +219,20 @@ export interface components {
             branch_unlocked: boolean;
             datesheet_unlocked: boolean;
             home_route: string;
+        };
+        /**
+         * @description * `male` - Male
+         *     * `female` - Female
+         *     * `other` - Other
+         * @enum {string}
+         */
+        GenderEnum: "male" | "female" | "other";
+        Guardian: {
+            guardian_name: string;
+            guardian_cnic: string;
+            guardian_occupation: string;
+            guardian_contact: string;
+            emergency_contact: string;
         };
         LoginRequest: {
             /** Format: email */
@@ -101,6 +252,96 @@ export interface components {
             name: string;
             flow: components["schemas"]["FlowState"] | null;
         };
+        MyBranch: {
+            /** Format: uuid */
+            readonly id: string;
+            name: string;
+            code: string;
+            city: string;
+            address: string;
+            contact_number: string;
+        };
+        MyCourse: {
+            /** Format: uuid */
+            readonly id: string;
+            code: string;
+            title: string;
+            credit_hours: number;
+        };
+        MyRequest: {
+            /** Format: uuid */
+            readonly id: string;
+            readonly type: components["schemas"]["TypeEnum"];
+            readonly reason: string;
+            readonly status: components["schemas"]["StatusEnum"];
+            readonly admin_remark: string;
+            /** Format: date-time */
+            readonly created_at: string;
+            /** Format: date-time */
+            readonly reviewed_at: string | null;
+        };
+        Personal: {
+            full_name: string;
+            /** Format: email */
+            email: string;
+            phone: string;
+            /** @description CNIC or B-Form: 12345-1234567-1 */
+            cnic: string;
+            /** Format: date */
+            date_of_birth: string;
+            gender: components["schemas"]["GenderEnum"];
+            address: string;
+            /** Format: uri */
+            photo?: string | null;
+        };
+        Profile: {
+            personal: components["schemas"]["Personal"];
+            guardian: components["schemas"]["Guardian"];
+            academic: components["schemas"]["Academic"];
+            branch: components["schemas"]["MyBranch"] | null;
+            readonly flow: components["schemas"]["FlowState"];
+        };
+        RaiseRequestRequest: {
+            type: components["schemas"]["TypeEnum"];
+            reason: string;
+        };
+        SaveDatesheetRequest: {
+            selections: components["schemas"]["SelectionInputRequest"][];
+        };
+        SelectBranchRequest: {
+            /** Format: uuid */
+            branch: string;
+        };
+        SelectionInputRequest: {
+            /** Format: uuid */
+            course: string;
+            /** Format: uuid */
+            slot: string;
+        };
+        SlotOption: {
+            /** Format: uuid */
+            id: string;
+            /** Format: date-time */
+            start_at: string;
+            /** Format: date-time */
+            end_at: string;
+            day: string;
+            /** @description null means unlimited */
+            seats_left: number | null;
+        };
+        /**
+         * @description * `pending` - Pending
+         *     * `approved` - Approved
+         *     * `rejected` - Rejected
+         * @enum {string}
+         */
+        StatusEnum: "pending" | "approved" | "rejected";
+        /**
+         * @description * `change_branch` - Change branch
+         *     * `change_datesheet` - Change date sheet
+         * @enum {string}
+         */
+        TypeEnum: "change_branch" | "change_datesheet";
     };
     responses: never;
     parameters: never;
@@ -187,6 +428,176 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    me_branch_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SelectBranchRequest"];
+                "multipart/form-data": components["schemas"]["SelectBranchRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["SelectBranchRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyBranch"];
+                };
+            };
+        };
+    };
+    me_branches_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyBranch"][];
+                };
+            };
+        };
+    };
+    me_courses_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseSlots"][];
+                };
+            };
+        };
+    };
+    me_datesheet_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Datesheet"];
+                };
+            };
+        };
+    };
+    me_datesheet_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveDatesheetRequest"];
+                "multipart/form-data": components["schemas"]["SaveDatesheetRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["SaveDatesheetRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Datesheet"];
+                };
+            };
+        };
+    };
+    me_profile_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Profile"];
+                };
+            };
+        };
+    };
+    me_requests_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyRequest"][];
+                };
+            };
+        };
+    };
+    me_requests_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RaiseRequestRequest"];
+                "multipart/form-data": components["schemas"]["RaiseRequestRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["RaiseRequestRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyRequest"];
+                };
             };
         };
     };
