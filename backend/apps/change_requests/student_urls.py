@@ -1,8 +1,7 @@
 """Student request routes (S5). Mounted at /api/v1/me/ — 'requests/'."""
 
-from django.urls import path  # noqa: F401
-from rest_framework.routers import SimpleRouter
+from django.urls import path
 
-router = SimpleRouter(trailing_slash=True)
+from apps.change_requests.student_views import MyRequestsView
 
-urlpatterns: list = [*router.urls]
+urlpatterns = [path("requests/", MyRequestsView.as_view(), name="me-requests")]
