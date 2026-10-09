@@ -16,18 +16,33 @@ const TONES = {
   danger: "bg-danger/10 text-danger",
 };
 
-export function AuthCard({ title, description, icon: Icon, tone = "primary", children }: AuthCardProps) {
+export function AuthCard({
+  title,
+  description,
+  icon: Icon,
+  tone = "primary",
+  children,
+}: AuthCardProps) {
   return (
-    <section className="rounded-xl border bg-card p-5 shadow-sm sm:p-8">
+    <section className="relative overflow-hidden rounded-2xl border bg-card/90 p-5 shadow-md backdrop-blur-sm before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-gradient-to-r before:from-primary before:to-sky sm:p-8">
       {Icon && (
-        <div className={cn("mb-4 flex size-12 items-center justify-center rounded-full", TONES[tone])}>
+        <div
+          className={cn(
+            "mb-4 flex size-12 items-center justify-center rounded-full",
+            TONES[tone],
+          )}
+        >
           <Icon className="size-6" aria-hidden />
         </div>
       )}
       <h1 className="text-[clamp(1.375rem,1.2rem+0.8vw,1.75rem)] font-semibold tracking-tight break-words">
         {title}
       </h1>
-      {description && <p className="mt-1.5 text-sm break-words text-muted-foreground md:text-base">{description}</p>}
+      {description && (
+        <p className="mt-1.5 text-sm break-words text-muted-foreground md:text-base">
+          {description}
+        </p>
+      )}
       {children && <div className="mt-6">{children}</div>}
     </section>
   );
@@ -35,7 +50,11 @@ export function AuthCard({ title, description, icon: Icon, tone = "primary", chi
 
 export function AuthCardSkeleton() {
   return (
-    <div aria-busy="true" aria-label="Loading" className="space-y-4 rounded-xl border bg-card p-5 shadow-sm sm:p-8">
+    <div
+      aria-busy="true"
+      aria-label="Loading"
+      className="space-y-4 rounded-2xl border bg-card p-5 shadow-md sm:p-8"
+    >
       <Skeleton className="h-8 w-48 max-w-full" />
       <Skeleton className="h-5 w-72 max-w-full" />
       <Skeleton className="h-11 w-full" />
