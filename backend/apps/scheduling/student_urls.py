@@ -1,8 +1,10 @@
 """Student courses + date sheet routes (S5). Mounted at /api/v1/me/."""
 
-from django.urls import path  # noqa: F401
-from rest_framework.routers import SimpleRouter
+from django.urls import path
 
-router = SimpleRouter(trailing_slash=True)
+from apps.scheduling.student_views import MyCoursesView, MyDatesheetView
 
-urlpatterns: list = [*router.urls]
+urlpatterns = [
+    path("courses/", MyCoursesView.as_view(), name="me-courses"),
+    path("datesheet/", MyDatesheetView.as_view(), name="me-datesheet"),
+]

@@ -4,6 +4,155 @@
  */
 
 export interface paths {
+    "/api/v1/admin/audit-log/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Read-only history of admin actions, newest first (bonus BN-5). */
+        get: operations["admin_audit_log_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/requests/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["admin_requests_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/requests/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["admin_requests_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/requests/{id}/approve/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["admin_requests_approve_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/requests/{id}/reject/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["admin_requests_reject_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/slots/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_slots_list"];
+        put?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        post: operations["admin_slots_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/slots/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_slots_retrieve"];
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        put: operations["admin_slots_update"];
+        post?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        delete: operations["admin_slots_destroy"];
+        options?: never;
+        head?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        patch: operations["admin_slots_partial_update"];
+        trace?: never;
+    };
     "/api/v1/auth/forgot-password/": {
         parameters: {
             query?: never;
@@ -122,10 +271,238 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/me/branch/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post: operations["me_branch_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/branches/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["me_branches_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/courses/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["me_courses_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/datesheet/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["me_datesheet_retrieve"];
+        put?: never;
+        post: operations["me_datesheet_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/profile/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["me_profile_retrieve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/me/requests/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Own requests only, newest first. Not paginated: one pending per type keeps the list short. */
+        get: operations["me_requests_list"];
+        put?: never;
+        /** @description Own requests only, newest first. Not paginated: one pending per type keeps the list short. */
+        post: operations["me_requests_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        Academic: {
+            registration_no: string;
+            program: string;
+            semester: number;
+            /** @description e.g. 2024-2028 */
+            session: string;
+            previous_qualification: string;
+            previous_institute: string;
+            /** Format: decimal */
+            marks_or_cgpa: string;
+        };
+        AdminRequest: {
+            /** Format: uuid */
+            readonly id: string;
+            student: components["schemas"]["RequestStudent"];
+            type: components["schemas"]["TypeEnum"];
+            type_label: string;
+            reason: string;
+            /** @default pending */
+            status: components["schemas"]["StatusEnum"];
+            admin_remark?: string;
+            /** Format: email */
+            reviewed_by?: string;
+            /** Format: date-time */
+            reviewed_at?: string | null;
+            /** Format: date-time */
+            readonly created_at: string;
+        };
+        /** @description Adds what the reviewer needs to decide: the student's current branch and saved date sheet. */
+        AdminRequestDetail: {
+            /** Format: uuid */
+            readonly id: string;
+            student: components["schemas"]["RequestStudent"];
+            type: components["schemas"]["TypeEnum"];
+            type_label: string;
+            reason: string;
+            /** @default pending */
+            status: components["schemas"]["StatusEnum"];
+            admin_remark?: string;
+            /** Format: email */
+            reviewed_by?: string;
+            /** Format: date-time */
+            reviewed_at?: string | null;
+            /** Format: date-time */
+            readonly created_at: string;
+            branch_city?: string;
+            /** Format: date-time */
+            datesheet_saved_at: string;
+            readonly datesheet: {
+                [key: string]: unknown;
+            }[];
+        };
+        /**
+         * @description Accepts local `date` + `start_time` (+ optional `end_time`); returns them back with `day` and seat info.
+         *
+         *     List querysets annotate `chosen_count`; the view passes `active_branches` in the context.
+         */
+        AdminSlot: {
+            /** Format: uuid */
+            readonly id: string;
+            /** Format: uuid */
+            course: string;
+            readonly course_code: string;
+            readonly course_title: string;
+            /** Format: date-time */
+            readonly start_at: string;
+            /** Format: date-time */
+            readonly end_at: string | null;
+            capacity_per_branch?: number | null;
+        };
+        /**
+         * @description Accepts local `date` + `start_time` (+ optional `end_time`); returns them back with `day` and seat info.
+         *
+         *     List querysets annotate `chosen_count`; the view passes `active_branches` in the context.
+         */
+        AdminSlotRequest: {
+            /** Format: uuid */
+            course: string;
+            /** Format: date */
+            date: string;
+            /** Format: time */
+            start_time: string;
+            /** Format: time */
+            end_time?: string | null;
+            capacity_per_branch?: number | null;
+        };
+        AuditLog: {
+            readonly id: number;
+            /** Format: date-time */
+            readonly created_at: string;
+            /** Format: email */
+            actor?: string;
+            action: string;
+            entity: string;
+            entity_id?: string;
+            label?: string;
+            details?: unknown;
+        };
+        CourseSlots: {
+            course: components["schemas"]["MyCourse"];
+            slots: components["schemas"]["SlotOption"][];
+            /** Format: uuid */
+            selected_slot: string | null;
+        };
+        Datesheet: {
+            full_name: string;
+            registration_no: string;
+            program: string;
+            semester: number;
+            session: string;
+            branch: components["schemas"]["MyBranch"];
+            /** Format: date-time */
+            saved_at: string;
+            locked: boolean;
+            rows: components["schemas"]["DatesheetRow"][];
+        };
+        DatesheetRow: {
+            course_code: string;
+            course_title: string;
+            credit_hours: number;
+            /** Format: date-time */
+            start_at: string;
+            /** Format: date-time */
+            end_at: string;
+            day: string;
+        };
+        DecisionRequest: {
+            /** @default  */
+            remark: string;
+        };
         FlowState: {
             has_branch: boolean;
             needs_branch_selection: boolean;
@@ -140,6 +517,20 @@ export interface components {
         ForgotPasswordRequest: {
             /** Format: email */
             email: string;
+        };
+        /**
+         * @description * `male` - Male
+         *     * `female` - Female
+         *     * `other` - Other
+         * @enum {string}
+         */
+        GenderEnum: "male" | "female" | "other";
+        Guardian: {
+            guardian_name: string;
+            guardian_cnic: string;
+            guardian_occupation: string;
+            guardian_contact: string;
+            emergency_contact: string;
         };
         LoginRequest: {
             /** Format: email */
@@ -162,12 +553,124 @@ export interface components {
         Message: {
             message: string;
         };
+        MyBranch: {
+            /** Format: uuid */
+            readonly id: string;
+            name: string;
+            code: string;
+            city: string;
+            address: string;
+            contact_number: string;
+        };
+        MyCourse: {
+            /** Format: uuid */
+            readonly id: string;
+            code: string;
+            title: string;
+            credit_hours: number;
+        };
+        MyRequest: {
+            /** Format: uuid */
+            readonly id: string;
+            readonly type: components["schemas"]["TypeEnum"];
+            readonly reason: string;
+            readonly status: components["schemas"]["StatusEnum"];
+            readonly admin_remark: string;
+            /** Format: date-time */
+            readonly created_at: string;
+            /** Format: date-time */
+            readonly reviewed_at: string | null;
+        };
+        PaginatedAdminRequestList: {
+            results: components["schemas"]["AdminRequest"][];
+            count: number;
+            page: number;
+            page_size: number;
+            total_pages: number;
+        };
+        PaginatedAdminSlotList: {
+            results: components["schemas"]["AdminSlot"][];
+            count: number;
+            page: number;
+            page_size: number;
+            total_pages: number;
+        };
+        PaginatedAuditLogList: {
+            results: components["schemas"]["AuditLog"][];
+            count: number;
+            page: number;
+            page_size: number;
+            total_pages: number;
+        };
+        /**
+         * @description Accepts local `date` + `start_time` (+ optional `end_time`); returns them back with `day` and seat info.
+         *
+         *     List querysets annotate `chosen_count`; the view passes `active_branches` in the context.
+         */
+        PatchedAdminSlotRequest: {
+            /** Format: uuid */
+            course?: string;
+            /** Format: date */
+            date?: string;
+            /** Format: time */
+            start_time?: string;
+            /** Format: time */
+            end_time?: string | null;
+            capacity_per_branch?: number | null;
+        };
+        Personal: {
+            full_name: string;
+            /** Format: email */
+            email: string;
+            phone: string;
+            /** @description CNIC or B-Form: 12345-1234567-1 */
+            cnic: string;
+            /** Format: date */
+            date_of_birth: string;
+            gender: components["schemas"]["GenderEnum"];
+            address: string;
+            /** Format: uri */
+            photo?: string | null;
+        };
+        Profile: {
+            personal: components["schemas"]["Personal"];
+            guardian: components["schemas"]["Guardian"];
+            academic: components["schemas"]["Academic"];
+            branch: components["schemas"]["MyBranch"] | null;
+            readonly flow: components["schemas"]["FlowState"];
+        };
         /**
          * @description * `setup` - setup
          *     * `reset` - reset
          * @enum {string}
          */
         PurposeEnum: "setup" | "reset";
+        RaiseRequestRequest: {
+            type: components["schemas"]["TypeEnum"];
+            reason: string;
+        };
+        RequestStudent: {
+            /** Format: uuid */
+            readonly id: string;
+            full_name: string;
+            registration_no: string;
+            /** Format: email */
+            email: string;
+            branch?: string;
+        };
+        SaveDatesheetRequest: {
+            selections: components["schemas"]["SelectionInputRequest"][];
+        };
+        SelectBranchRequest: {
+            /** Format: uuid */
+            branch: string;
+        };
+        SelectionInputRequest: {
+            /** Format: uuid */
+            course: string;
+            /** Format: uuid */
+            slot: string;
+        };
         SetPasswordRequest: {
             uid: string;
             token: string;
@@ -175,11 +678,35 @@ export interface components {
             password: string;
             confirm_password: string;
         };
+        SlotOption: {
+            /** Format: uuid */
+            id: string;
+            /** Format: date-time */
+            start_at: string;
+            /** Format: date-time */
+            end_at: string;
+            day: string;
+            /** @description null means unlimited */
+            seats_left: number | null;
+        };
+        /**
+         * @description * `pending` - Pending
+         *     * `approved` - Approved
+         *     * `rejected` - Rejected
+         * @enum {string}
+         */
+        StatusEnum: "pending" | "approved" | "rejected";
         TokenRequest: {
             uid: string;
             token: string;
             purpose: components["schemas"]["PurposeEnum"];
         };
+        /**
+         * @description * `change_branch` - Change branch
+         *     * `change_datesheet` - Change date sheet
+         * @enum {string}
+         */
+        TypeEnum: "change_branch" | "change_datesheet";
         ValidateTokenResponse: {
             valid: boolean;
             purpose?: components["schemas"]["PurposeEnum"];
@@ -196,6 +723,311 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    admin_audit_log_list: {
+        parameters: {
+            query?: {
+                action?: string;
+                date_from?: string;
+                date_to?: string;
+                entity?: string;
+                /** @description Which field to use when ordering the results. */
+                ordering?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                page_size?: number;
+                /** @description A search term. */
+                search?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedAuditLogList"];
+                };
+            };
+        };
+    };
+    admin_requests_list: {
+        parameters: {
+            query?: {
+                /** @description Which field to use when ordering the results. */
+                ordering?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                page_size?: number;
+                /** @description A search term. */
+                search?: string;
+                /**
+                 * @description * `pending` - Pending
+                 *     * `approved` - Approved
+                 *     * `rejected` - Rejected
+                 */
+                status?: "approved" | "pending" | "rejected";
+                /**
+                 * @description * `change_branch` - Change branch
+                 *     * `change_datesheet` - Change date sheet
+                 */
+                type?: "change_branch" | "change_datesheet";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedAdminRequestList"];
+                };
+            };
+        };
+    };
+    admin_requests_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this change request. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminRequestDetail"];
+                };
+            };
+        };
+    };
+    admin_requests_approve_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this change request. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["DecisionRequest"];
+                "multipart/form-data": components["schemas"]["DecisionRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["DecisionRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminRequestDetail"];
+                };
+            };
+        };
+    };
+    admin_requests_reject_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this change request. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["DecisionRequest"];
+                "multipart/form-data": components["schemas"]["DecisionRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["DecisionRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminRequestDetail"];
+                };
+            };
+        };
+    };
+    admin_slots_list: {
+        parameters: {
+            query?: {
+                course?: string;
+                date_from?: string;
+                date_to?: string;
+                /** @description Which field to use when ordering the results. */
+                ordering?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                page_size?: number;
+                /** @description A search term. */
+                search?: string;
+                upcoming?: boolean;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedAdminSlotList"];
+                };
+            };
+        };
+    };
+    admin_slots_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AdminSlotRequest"];
+                "multipart/form-data": components["schemas"]["AdminSlotRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["AdminSlotRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminSlot"];
+                };
+            };
+        };
+    };
+    admin_slots_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this exam slot. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminSlot"];
+                };
+            };
+        };
+    };
+    admin_slots_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this exam slot. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AdminSlotRequest"];
+                "multipart/form-data": components["schemas"]["AdminSlotRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["AdminSlotRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminSlot"];
+                };
+            };
+        };
+    };
+    admin_slots_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this exam slot. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    admin_slots_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this exam slot. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedAdminSlotRequest"];
+                "multipart/form-data": components["schemas"]["PatchedAdminSlotRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedAdminSlotRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AdminSlot"];
+                };
+            };
+        };
+    };
     auth_forgot_password_create: {
         parameters: {
             query?: never;
@@ -347,6 +1179,176 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ValidateTokenResponse"];
+                };
+            };
+        };
+    };
+    me_branch_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SelectBranchRequest"];
+                "multipart/form-data": components["schemas"]["SelectBranchRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["SelectBranchRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyBranch"];
+                };
+            };
+        };
+    };
+    me_branches_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyBranch"][];
+                };
+            };
+        };
+    };
+    me_courses_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CourseSlots"][];
+                };
+            };
+        };
+    };
+    me_datesheet_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Datesheet"];
+                };
+            };
+        };
+    };
+    me_datesheet_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SaveDatesheetRequest"];
+                "multipart/form-data": components["schemas"]["SaveDatesheetRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["SaveDatesheetRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Datesheet"];
+                };
+            };
+        };
+    };
+    me_profile_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Profile"];
+                };
+            };
+        };
+    };
+    me_requests_list: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyRequest"][];
+                };
+            };
+        };
+    };
+    me_requests_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RaiseRequestRequest"];
+                "multipart/form-data": components["schemas"]["RaiseRequestRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["RaiseRequestRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyRequest"];
                 };
             };
         };
