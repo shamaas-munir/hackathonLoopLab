@@ -1,8 +1,10 @@
-"""Admin branch routes (S2). Mounted at /api/v1/admin/ — register 'branches'."""
+"""Admin branch routes (S2). Mounted at /api/v1/admin/."""
 
-from django.urls import path  # noqa: F401
 from rest_framework.routers import SimpleRouter
 
-router = SimpleRouter(trailing_slash=True)
+from .views import BranchViewSet
 
-urlpatterns: list = [*router.urls]
+router = SimpleRouter(trailing_slash=True)
+router.register("branches", BranchViewSet, basename="branch")
+
+urlpatterns = router.urls
