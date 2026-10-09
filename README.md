@@ -165,6 +165,7 @@ uv sync
 Copy-Item .env.example .env        # then edit DATABASE_URL, SECRET_KEY, JWT_SECRET
 uv run python manage.py migrate    # creates tables, constraints and the btree_gist / pg_trgm extensions
 uv run python manage.py seed       # demo data (use --reset to rebuild it)
+uv run python manage.py seed_mock  # optional: 20 more students in mixed states + requests
 uv run waitress-serve --listen=127.0.0.1:8000 --threads=8 --channel-timeout=120 config.wsgi:application
 ```
 (`runserver` also works for calling the API directly, but it closes connections after each response, which the frontend proxy reuses; waitress, like gunicorn in production, keeps them alive.)
@@ -229,6 +230,8 @@ No secrets are hard-coded; `.env` files are git-ignored.
 ---
 
 ## Database design (ERD)
+
+Also available as a standalone page: [docs/ERD.md](docs/ERD.md).
 
 Generated from the actual Django models in `backend/apps/*/models.py`. `docs/erd.png` (`TODO(integrator):` export this diagram, e.g. with mermaid.live) is a static copy.
 
@@ -615,7 +618,7 @@ Backend production variables (on Render):
 Steps:
 1. Create the Neon database and copy its connection string.
 2. On Render: **New > Blueprint**, pick this repo; fill the `sync: false` variables. First deploy runs the migrations.
-3. Seed once from the Render shell: `uv run python manage.py seed`.
+3. Seed once from the Render shell: `uv run python manage.py seed && uv run python manage.py seed_mock`.
 4. On Vercel: import the repo, root directory `web`, set `BACKEND_URL`, deploy.
 5. Put the Vercel URL into `FRONTEND_URL`, `CSRF_TRUSTED_ORIGINS` and `CORS_ALLOWED_ORIGINS` on Render and redeploy.
 6. Smoke test: admin login, create a student with a real inbox, open the email, set a password, complete the student journey.

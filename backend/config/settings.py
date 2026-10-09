@@ -145,6 +145,8 @@ CELERY_BEAT_SCHEDULE = {
 
 # --- Email: Resend > SMTP > console ---
 DEFAULT_FROM_EMAIL = env("MAIL_FROM", default="ExamSlot <no-reply@examslot.app>")
+EMAIL_TIMEOUT = env.int("EMAIL_TIMEOUT", default=10)  # seconds; a hung mail server must not block a worker
+EMAIL_SEND_IN_BACKGROUND = True
 if env("RESEND_API_KEY", default=""):
     EMAIL_BACKEND = "anymail.backends.resend.EmailBackend"
     ANYMAIL = {"RESEND_API_KEY": env("RESEND_API_KEY")}

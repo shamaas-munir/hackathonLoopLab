@@ -21,6 +21,7 @@ def _fast_hashing_and_console_email(settings):
     settings.PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
     settings.EMAIL_BACKEND = "django.core.mail.backends.locmem.EmailBackend"
     settings.CELERY_TASK_ALWAYS_EAGER = True
+    settings.EMAIL_SEND_IN_BACKGROUND = False
     settings.CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
     settings.AUTH_COOKIE_SECURE = False
 
