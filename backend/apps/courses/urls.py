@@ -1,8 +1,11 @@
-"""Admin course + department routes (S2). Mounted at /api/v1/admin/ — register 'courses', 'departments'."""
+"""Admin course + department routes (S2). Mounted at /api/v1/admin/."""
 
-from django.urls import path  # noqa: F401
 from rest_framework.routers import SimpleRouter
 
-router = SimpleRouter(trailing_slash=True)
+from .views import CourseViewSet, DepartmentViewSet
 
-urlpatterns: list = [*router.urls]
+router = SimpleRouter(trailing_slash=True)
+router.register("courses", CourseViewSet, basename="course")
+router.register("departments", DepartmentViewSet, basename="department")
+
+urlpatterns = router.urls
