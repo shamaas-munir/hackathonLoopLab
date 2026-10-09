@@ -4,6 +4,224 @@
  */
 
 export interface paths {
+    "/api/v1/admin/assignments/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get: operations["admin_assignments_list"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/assignments/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete: operations["admin_assignments_destroy"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/programs/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_programs_list"];
+        put?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        post: operations["admin_programs_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/programs/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_programs_retrieve"];
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        put: operations["admin_programs_update"];
+        post?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        delete: operations["admin_programs_destroy"];
+        options?: never;
+        head?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        patch: operations["admin_programs_partial_update"];
+        trace?: never;
+    };
+    "/api/v1/admin/students/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_students_list"];
+        put?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        post: operations["admin_students_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/students/{id}/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        get: operations["admin_students_retrieve"];
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        put: operations["admin_students_update"];
+        post?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        delete: operations["admin_students_destroy"];
+        options?: never;
+        head?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        patch: operations["admin_students_partial_update"];
+        trace?: never;
+    };
+    "/api/v1/admin/students/{id}/assignments/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        put: operations["admin_students_assignments_update"];
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        post: operations["admin_students_assignments_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/students/{id}/resend-invite/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * @description CRUD for admins with server-side pagination, search, filters, ordering and audit logging.
+         *
+         *     Subclasses set `queryset`, `serializer_class`, `search_fields`, `filterset_fields` / `filterset_class`,
+         *     `ordering_fields` and `ordering`.
+         */
+        post: operations["admin_students_resend_invite_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/auth/login/": {
         parameters: {
             query?: never;
@@ -72,6 +290,44 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /**
+         * @description * `invited` - invited
+         *     * `active` - active
+         * @enum {string}
+         */
+        AccountStatusEnum: "invited" | "active";
+        AddCourseRequest: {
+            /** Format: uuid */
+            course_id: string;
+        };
+        AssignmentList: {
+            readonly id: number;
+            /** Format: uuid */
+            student_id: string;
+            student_name: string;
+            registration_no: string;
+            program_name: string;
+            course: components["schemas"]["CourseBrief"];
+            student_course_count: number;
+            readonly locked: boolean;
+            /** Format: date-time */
+            readonly created_at: string;
+        };
+        BranchBrief: {
+            /** Format: uuid */
+            id: string;
+            name: string;
+            code: string;
+            city: string;
+        };
+        CourseBrief: {
+            /** Format: uuid */
+            id: string;
+            code: string;
+            title: string;
+            credit_hours: number;
+            status: string;
+        };
         FlowState: {
             has_branch: boolean;
             needs_branch_selection: boolean;
@@ -83,6 +339,13 @@ export interface components {
             datesheet_unlocked: boolean;
             home_route: string;
         };
+        /**
+         * @description * `male` - Male
+         *     * `female` - Female
+         *     * `other` - Other
+         * @enum {string}
+         */
+        GenderEnum: "male" | "female" | "other";
         LoginRequest: {
             /** Format: email */
             email: string;
@@ -101,6 +364,292 @@ export interface components {
             name: string;
             flow: components["schemas"]["FlowState"] | null;
         };
+        PaginatedAssignmentListList: {
+            results: components["schemas"]["AssignmentList"][];
+            count: number;
+            page: number;
+            page_size: number;
+            total_pages: number;
+        };
+        PaginatedProgramList: {
+            results: components["schemas"]["Program"][];
+            count: number;
+            page: number;
+            page_size: number;
+            total_pages: number;
+        };
+        PaginatedStudentListList: {
+            results: components["schemas"]["StudentList"][];
+            count: number;
+            page: number;
+            page_size: number;
+            total_pages: number;
+        };
+        PatchedProgramRequest: {
+            name?: string;
+            code?: string;
+            duration_semesters?: number;
+        };
+        /** @description Create / update payload. Flat fields; the form groups them as Personal, Guardian and Academic. */
+        PatchedStudentWriteRequest: {
+            full_name?: string;
+            /** Format: email */
+            email?: string;
+            phone?: string;
+            /** @description CNIC or B-Form: 12345-1234567-1 */
+            cnic?: string;
+            /** Format: date */
+            date_of_birth?: string;
+            gender?: components["schemas"]["GenderEnum"];
+            address?: string;
+            /** Format: binary */
+            photo?: string | null;
+            guardian_name?: string;
+            guardian_cnic?: string;
+            guardian_occupation?: string;
+            guardian_contact?: string;
+            emergency_contact?: string;
+            registration_no?: string;
+            /** Format: uuid */
+            program?: string;
+            semester?: number;
+            /** @description e.g. 2024-2028 */
+            session?: string;
+            previous_qualification?: string;
+            previous_institute?: string;
+            /** Format: decimal */
+            marks_or_cgpa?: string;
+            version?: number;
+        };
+        Program: {
+            /** Format: uuid */
+            readonly id: string;
+            name: string;
+            code: string;
+            duration_semesters?: number;
+            readonly student_count: number;
+        };
+        ProgramRequest: {
+            name: string;
+            code: string;
+            duration_semesters?: number;
+        };
+        ReplaceCoursesRequest: {
+            course_ids: string[];
+        };
+        RequestBrief: {
+            /** Format: uuid */
+            id: string;
+            type: string;
+            status: string;
+            reason: string;
+            admin_remark: string;
+            /** Format: date-time */
+            created_at: string;
+            /** Format: date-time */
+            reviewed_at: string | null;
+        };
+        SelectionBrief: {
+            id: number;
+            course_code: string;
+            course_title: string;
+            /** Format: date-time */
+            start_at: string;
+            /** Format: date-time */
+            end_at: string | null;
+            branch_name: string;
+        };
+        StudentAssignment: {
+            readonly id: number;
+            course: components["schemas"]["CourseBrief"];
+            /** Format: date-time */
+            readonly created_at: string;
+        };
+        /** @description Response of the assignment endpoints: the student's current course set. */
+        StudentCourses: {
+            assignment_count: number;
+            assignments: components["schemas"]["StudentAssignment"][];
+        };
+        StudentCreated: {
+            /** Format: uuid */
+            readonly id: string;
+            readonly version: number;
+            readonly account_status: components["schemas"]["AccountStatusEnum"];
+            /** Format: date-time */
+            readonly created_at: string;
+            readonly full_name: string;
+            /** Format: email */
+            email: string;
+            readonly phone: string;
+            /** @description CNIC or B-Form: 12345-1234567-1 */
+            readonly cnic: string;
+            /** Format: date */
+            readonly date_of_birth: string;
+            readonly gender: components["schemas"]["GenderEnum"];
+            readonly address: string;
+            /** Format: uri */
+            readonly photo: string | null;
+            readonly guardian_name: string;
+            readonly guardian_cnic: string;
+            readonly guardian_occupation: string;
+            readonly guardian_contact: string;
+            readonly emergency_contact: string;
+            readonly registration_no: string;
+            /** Format: uuid */
+            readonly program: string;
+            program_name: string;
+            readonly semester: number;
+            /** @description e.g. 2024-2028 */
+            readonly session: string;
+            readonly previous_qualification: string;
+            readonly previous_institute: string;
+            /** Format: decimal */
+            readonly marks_or_cgpa: string;
+            branch: components["schemas"]["BranchBrief"] | null;
+            /** Format: date-time */
+            readonly branch_selected_at: string | null;
+            /** Format: date-time */
+            readonly datesheet_saved_at: string | null;
+            readonly branch_unlocked: boolean;
+            readonly datesheet_unlocked: boolean;
+            assignments: components["schemas"]["StudentAssignment"][];
+            selections: components["schemas"]["SelectionBrief"][];
+            requests: components["schemas"]["RequestBrief"][];
+            /** @default true */
+            email_queued: boolean;
+        };
+        StudentDetail: {
+            /** Format: uuid */
+            readonly id: string;
+            readonly version: number;
+            readonly account_status: components["schemas"]["AccountStatusEnum"];
+            /** Format: date-time */
+            readonly created_at: string;
+            readonly full_name: string;
+            /** Format: email */
+            email: string;
+            readonly phone: string;
+            /** @description CNIC or B-Form: 12345-1234567-1 */
+            readonly cnic: string;
+            /** Format: date */
+            readonly date_of_birth: string;
+            readonly gender: components["schemas"]["GenderEnum"];
+            readonly address: string;
+            /** Format: uri */
+            readonly photo: string | null;
+            readonly guardian_name: string;
+            readonly guardian_cnic: string;
+            readonly guardian_occupation: string;
+            readonly guardian_contact: string;
+            readonly emergency_contact: string;
+            readonly registration_no: string;
+            /** Format: uuid */
+            readonly program: string;
+            program_name: string;
+            readonly semester: number;
+            /** @description e.g. 2024-2028 */
+            readonly session: string;
+            readonly previous_qualification: string;
+            readonly previous_institute: string;
+            /** Format: decimal */
+            readonly marks_or_cgpa: string;
+            branch: components["schemas"]["BranchBrief"] | null;
+            /** Format: date-time */
+            readonly branch_selected_at: string | null;
+            /** Format: date-time */
+            readonly datesheet_saved_at: string | null;
+            readonly branch_unlocked: boolean;
+            readonly datesheet_unlocked: boolean;
+            assignments: components["schemas"]["StudentAssignment"][];
+            selections: components["schemas"]["SelectionBrief"][];
+            requests: components["schemas"]["RequestBrief"][];
+        };
+        StudentList: {
+            /** Format: uuid */
+            readonly id: string;
+            readonly full_name: string;
+            /** Format: email */
+            email: string;
+            /** Format: uri */
+            readonly photo: string | null;
+            readonly registration_no: string;
+            /** Format: uuid */
+            readonly program: string;
+            program_name: string;
+            readonly semester: number;
+            /** Format: uuid */
+            readonly branch: string | null;
+            branch_name?: string;
+            assignment_count: number;
+            /** Format: date-time */
+            readonly datesheet_saved_at: string | null;
+            readonly datesheet_unlocked: boolean;
+            readonly account_status: components["schemas"]["AccountStatusEnum"];
+            /** Format: date-time */
+            readonly created_at: string;
+        };
+        /** @description Create / update payload. Flat fields; the form groups them as Personal, Guardian and Academic. */
+        StudentWrite: {
+            full_name: string;
+            /** Format: email */
+            email: string;
+            phone: string;
+            /** @description CNIC or B-Form: 12345-1234567-1 */
+            cnic: string;
+            /** Format: date */
+            date_of_birth: string;
+            gender: components["schemas"]["GenderEnum"];
+            address: string;
+            /** Format: uri */
+            photo?: string | null;
+            guardian_name: string;
+            guardian_cnic: string;
+            guardian_occupation: string;
+            guardian_contact: string;
+            emergency_contact: string;
+            registration_no: string;
+            /** Format: uuid */
+            program: string;
+            semester: number;
+            /** @description e.g. 2024-2028 */
+            session: string;
+            previous_qualification: string;
+            previous_institute: string;
+            /** Format: decimal */
+            marks_or_cgpa: string;
+            version?: number;
+        };
+        /** @description Create / update payload. Flat fields; the form groups them as Personal, Guardian and Academic. */
+        StudentWriteRequest: {
+            full_name: string;
+            /** Format: email */
+            email: string;
+            phone: string;
+            /** @description CNIC or B-Form: 12345-1234567-1 */
+            cnic: string;
+            /** Format: date */
+            date_of_birth: string;
+            gender: components["schemas"]["GenderEnum"];
+            address: string;
+            /** Format: binary */
+            photo?: string | null;
+            guardian_name: string;
+            guardian_cnic: string;
+            guardian_occupation: string;
+            guardian_contact: string;
+            emergency_contact: string;
+            registration_no: string;
+            /** Format: uuid */
+            program: string;
+            semester: number;
+            /** @description e.g. 2024-2028 */
+            session: string;
+            previous_qualification: string;
+            previous_institute: string;
+            /** Format: decimal */
+            marks_or_cgpa: string;
+            version?: number;
+        };
     };
     responses: never;
     parameters: never;
@@ -110,6 +659,457 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    admin_assignments_list: {
+        parameters: {
+            query?: {
+                course?: string;
+                /** @description Which field to use when ordering the results. */
+                ordering?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                page_size?: number;
+                program?: string;
+                /** @description A search term. */
+                search?: string;
+                student?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedAssignmentListList"];
+                };
+            };
+        };
+    };
+    admin_assignments_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A unique integer value identifying this course assignment. */
+                id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    admin_programs_list: {
+        parameters: {
+            query?: {
+                /** @description Which field to use when ordering the results. */
+                ordering?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                page_size?: number;
+                /** @description A search term. */
+                search?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedProgramList"];
+                };
+            };
+        };
+    };
+    admin_programs_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProgramRequest"];
+                "multipart/form-data": components["schemas"]["ProgramRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["ProgramRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Program"];
+                };
+            };
+        };
+    };
+    admin_programs_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this program. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Program"];
+                };
+            };
+        };
+    };
+    admin_programs_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this program. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ProgramRequest"];
+                "multipart/form-data": components["schemas"]["ProgramRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["ProgramRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Program"];
+                };
+            };
+        };
+    };
+    admin_programs_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this program. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    admin_programs_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this program. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedProgramRequest"];
+                "multipart/form-data": components["schemas"]["PatchedProgramRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedProgramRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Program"];
+                };
+            };
+        };
+    };
+    admin_students_list: {
+        parameters: {
+            query?: {
+                /**
+                 * @description * `active` - Active
+                 *     * `invited` - Invited
+                 */
+                account?: "active" | "invited";
+                /**
+                 * @description * `complete` - Complete
+                 *     * `incomplete` - Incomplete
+                 */
+                assignment?: "complete" | "incomplete";
+                branch?: string;
+                /**
+                 * @description * `saved` - Saved
+                 *     * `not_saved` - Not saved
+                 */
+                datesheet?: "not_saved" | "saved";
+                /** @description Which field to use when ordering the results. */
+                ordering?: string;
+                /** @description A page number within the paginated result set. */
+                page?: number;
+                /** @description Number of results to return per page. */
+                page_size?: number;
+                program?: string;
+                /** @description A search term. */
+                search?: string;
+                semester?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PaginatedStudentListList"];
+                };
+            };
+        };
+    };
+    admin_students_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StudentWriteRequest"];
+                "multipart/form-data": components["schemas"]["StudentWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["StudentWriteRequest"];
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudentCreated"];
+                };
+            };
+        };
+    };
+    admin_students_retrieve: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this student. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudentDetail"];
+                };
+            };
+        };
+    };
+    admin_students_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this student. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StudentWriteRequest"];
+                "multipart/form-data": components["schemas"]["StudentWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["StudentWriteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudentDetail"];
+                };
+            };
+        };
+    };
+    admin_students_destroy: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this student. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    admin_students_partial_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this student. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["PatchedStudentWriteRequest"];
+                "multipart/form-data": components["schemas"]["PatchedStudentWriteRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["PatchedStudentWriteRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudentWrite"];
+                };
+            };
+        };
+    };
+    admin_students_assignments_update: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this student. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ReplaceCoursesRequest"];
+                "multipart/form-data": components["schemas"]["ReplaceCoursesRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["ReplaceCoursesRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudentCourses"];
+                };
+            };
+        };
+    };
+    admin_students_assignments_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this student. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AddCourseRequest"];
+                "multipart/form-data": components["schemas"]["AddCourseRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["AddCourseRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StudentCourses"];
+                };
+            };
+        };
+    };
+    admin_students_resend_invite_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description A UUID string identifying this student. */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No response body */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     auth_login_create: {
         parameters: {
             query?: never;

@@ -95,6 +95,7 @@ class StudentListSerializer(serializers.ModelSerializer):
             "account_status",
             "created_at",
         ]
+        read_only_fields = fields
 
     @extend_schema_field(serializers.ChoiceField(choices=["invited", "active"]))
     def get_account_status(self, obj):
@@ -297,6 +298,7 @@ class StudentDetailSerializer(serializers.ModelSerializer):
             "selections",
             "requests",
         ]
+        read_only_fields = fields
 
     @extend_schema_field(serializers.ChoiceField(choices=["invited", "active"]))
     def get_account_status(self, obj):
@@ -350,6 +352,7 @@ class AssignmentListSerializer(serializers.ModelSerializer):
             "locked",
             "created_at",
         ]
+        read_only_fields = fields
 
     def get_locked(self, obj) -> bool:
         student = obj.student
