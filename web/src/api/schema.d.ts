@@ -4,6 +4,23 @@
  */
 
 export interface paths {
+    "/api/v1/auth/forgot-password/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description No auth: a stale or broken cookie must never block login or password links. */
+        post: operations["auth_forgot_password_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/auth/login/": {
         parameters: {
             query?: never;
@@ -13,6 +30,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description No auth: a stale or broken cookie must never block login or password links. */
         post: operations["auth_login_create"];
         delete?: never;
         options?: never;
@@ -29,6 +47,7 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description No auth: a stale or broken cookie must never block login or password links. */
         post: operations["auth_logout_create"];
         delete?: never;
         options?: never;
@@ -61,7 +80,42 @@ export interface paths {
         };
         get?: never;
         put?: never;
+        /** @description No auth: a stale or broken cookie must never block login or password links. */
         post: operations["auth_refresh_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/set-password/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description No auth: a stale or broken cookie must never block login or password links. */
+        post: operations["auth_set_password_create"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/validate-token/": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** @description No auth: a stale or broken cookie must never block login or password links. */
+        post: operations["auth_validate_token_create"];
         delete?: never;
         options?: never;
         head?: never;
@@ -83,6 +137,10 @@ export interface components {
             datesheet_unlocked: boolean;
             home_route: string;
         };
+        ForgotPasswordRequest: {
+            /** Format: email */
+            email: string;
+        };
         LoginRequest: {
             /** Format: email */
             email: string;
@@ -101,6 +159,34 @@ export interface components {
             name: string;
             flow: components["schemas"]["FlowState"] | null;
         };
+        Message: {
+            message: string;
+        };
+        /**
+         * @description * `setup` - setup
+         *     * `reset` - reset
+         * @enum {string}
+         */
+        PurposeEnum: "setup" | "reset";
+        SetPasswordRequest: {
+            uid: string;
+            token: string;
+            purpose: components["schemas"]["PurposeEnum"];
+            password: string;
+            confirm_password: string;
+        };
+        TokenRequest: {
+            uid: string;
+            token: string;
+            purpose: components["schemas"]["PurposeEnum"];
+        };
+        ValidateTokenResponse: {
+            valid: boolean;
+            purpose?: components["schemas"]["PurposeEnum"];
+            name?: string;
+            /** Format: email */
+            email?: string;
+        };
     };
     responses: never;
     parameters: never;
@@ -110,6 +196,31 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    auth_forgot_password_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ForgotPasswordRequest"];
+                "multipart/form-data": components["schemas"]["ForgotPasswordRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["ForgotPasswordRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Message"];
+                };
+            };
+        };
+    };
     auth_login_create: {
         parameters: {
             query?: never;
@@ -187,6 +298,56 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content?: never;
+            };
+        };
+    };
+    auth_set_password_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetPasswordRequest"];
+                "multipart/form-data": components["schemas"]["SetPasswordRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["SetPasswordRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Message"];
+                };
+            };
+        };
+    };
+    auth_validate_token_create: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TokenRequest"];
+                "multipart/form-data": components["schemas"]["TokenRequest"];
+                "application/x-www-form-urlencoded": components["schemas"]["TokenRequest"];
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ValidateTokenResponse"];
+                };
             };
         };
     };
