@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { EmptyState } from "@/components/shared/EmptyState";
 import { PageHeader } from "@/components/shared/PageHeader";
+import { RequestsView } from "@/features/requests/RequestsView";
 
 export const metadata: Metadata = { title: "Requests" };
 
@@ -9,9 +9,9 @@ export default function RequestsPage() {
     <>
       <PageHeader
         title="Requests"
-        description="Branch and date sheet change requests from students."
+        description="Branch and date sheet change requests from students. Approving unlocks the change once."
       />
-      <EmptyState title="Coming soon" description="This page is being built." />
+      <RequestsView />
     </>
   );
 }
