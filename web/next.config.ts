@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   partialPrefetching: true,
   // Django URLs end with "/": keep the slash instead of redirecting it away.
   skipTrailingSlashRedirect: true,
+  // Allow slow upstream responses (remote database over a high-latency link) instead of failing at 30 s.
+  experimental: { proxyTimeout: 120_000 },
   async rewrites() {
     return [
       { source: "/api/:path*/", destination: `${backendUrl}/api/:path*/` },

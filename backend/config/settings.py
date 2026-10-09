@@ -82,7 +82,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-ASGI_APPLICATION = "config.asgi.application"
 
 DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASES["default"]["CONN_MAX_AGE"] = env.int("DB_CONN_MAX_AGE", default=60)
@@ -135,9 +134,9 @@ if REDIS_URL:
 else:
     CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
 
-# --- Celery: real broker when Redis exists, otherwise tasks run inline ---
-CELERY_BROKER_URL = REDIS_URL or "memory://"
-CELERY_TASK_ALWAYS_EAGER = not REDIS_URL
+# --- Celery: background workers only when a broker is configured; otherwise emails send right after commit ---
+CELERY_BROKER_URL = env("CELERY_BROKER_URL", default="") or "memory://"
+CELERY_TASK_ALWAYS_EAGER = CELERY_BROKER_URL == "memory://"
 CELERY_TASK_EAGER_PROPAGATES = False
 CELERY_TIMEZONE = TIME_ZONE
 CELERY_BEAT_SCHEDULE = {

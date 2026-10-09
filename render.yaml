@@ -8,7 +8,7 @@ services:
     plan: free
     healthCheckPath: /api/v1/health/
     buildCommand: uv sync --frozen && uv run python manage.py collectstatic --noinput && uv run python manage.py migrate
-    startCommand: uv run gunicorn config.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+    startCommand: uv run gunicorn config.wsgi:application --workers 2 --threads 4 --bind 0.0.0.0:$PORT --keep-alive 75 --timeout 60
     envVars:
       - key: PYTHON_VERSION
         value: 3.13.5

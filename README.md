@@ -122,7 +122,7 @@ Seed contents: 1 admin, 4 branches (Peshawar is inactive), 4 departments, 3 prog
 | Piece | Status |
 |---|---|
 | Next.js frontend, Django REST API, PostgreSQL constraints, save transaction with row lock | Built |
-| Transactional email outbox (sent after commit; Celery worker when `REDIS_URL` is set, otherwise synchronously) | Built |
+| Transactional email outbox (sent right after commit; Celery worker when `CELERY_BROKER_URL` is set) | Built |
 | Redis cache and rate limiting (falls back to in-memory when `REDIS_URL` is empty) | Built |
 | Seat counters with conditional `UPDATE ... WHERE booked < capacity` | Built |
 | Cloudflare CDN/WAF, virtual waiting room for the "everyone at 9:00" spike | Documented only |
@@ -165,8 +165,9 @@ uv sync
 Copy-Item .env.example .env        # then edit DATABASE_URL, SECRET_KEY, JWT_SECRET
 uv run python manage.py migrate    # creates tables, constraints and the btree_gist / pg_trgm extensions
 uv run python manage.py seed       # demo data (use --reset to rebuild it)
-uv run python manage.py runserver 8000
+uv run waitress-serve --listen=127.0.0.1:8000 --threads=8 --channel-timeout=120 config.wsgi:application
 ```
+(`runserver` also works for calling the API directly, but it closes connections after each response, which the frontend proxy reuses; waitress, like gunicorn in production, keeps them alive.)
 API docs: http://localhost:8000/api/v1/docs/
 
 ### 2. Frontend (second terminal)
@@ -182,7 +183,7 @@ App: http://localhost:3000
 ```powershell
 docker compose up -d                       # redis on 6379, mailpit on 1025 (inbox at http://localhost:8025)
 ```
-In `backend/.env` set `REDIS_URL=redis://localhost:6379/0`, and for Mailpit `EMAIL_HOST=localhost`, `EMAIL_PORT=1025`, `EMAIL_USE_TLS=False`. Then run a worker (Celery needs the solo pool on Windows):
+In `backend/.env` set `REDIS_URL=redis://localhost:6379/0` (cache) and optionally `CELERY_BROKER_URL=redis://localhost:6379/1` (background email worker), and for Mailpit `EMAIL_HOST=localhost`, `EMAIL_PORT=1025`, `EMAIL_USE_TLS=False`. Then run a worker (Celery needs the solo pool on Windows):
 ```powershell
 cd backend
 uv run celery -A config worker --pool=solo -l info
@@ -208,7 +209,8 @@ Without Redis everything still works: emails are sent right after the database c
 | `DATABASE_URL` | yes | `postgresql://user:pass@host/db?sslmode=require` | PostgreSQL connection |
 | `DB_CONN_MAX_AGE` | no | `60` | Persistent DB connection lifetime (seconds) |
 | `TEST_DB_NAME` | tests | `test_examslot` | Name of the pytest database |
-| `REDIS_URL` | no | empty, or `redis://localhost:6379/0` | Enables Celery workers and the shared Redis cache / rate limits |
+| `REDIS_URL` | no | empty, or `rediss://default:<token>@<host>.upstash.io:6379` | Shared Redis cache and rate limits |
+| `CELERY_BROKER_URL` | no | empty, or `redis://localhost:6379/1` | Background email worker (needs `celery -A config worker`); empty = send right after commit |
 | `MAIL_FROM` | no | `ExamSlot <no-reply@examslot.app>` | Sender address |
 | `RESEND_API_KEY` | no | `re_...` | Send email through Resend (takes priority) |
 | `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_HOST_USER`, `EMAIL_HOST_PASSWORD`, `EMAIL_USE_TLS` | no | Gmail / Mailpit settings | SMTP fallback; if neither Resend nor SMTP is set, emails go to the console |
@@ -499,7 +501,7 @@ Where the question paper is silent, we chose the following:
 | D13 | **Session:** JWT in httpOnly cookies: 15-minute access token, refreshed automatically with a rotating 7-day refresh token. `TODO(integrator):` confirm final values (the plan said 8 h). |
 | D14 | **Time zone:** all dates and times are **Asia/Karachi (PKT)**; "in the past" is checked against the current PKT time. Stored as UTC (`USE_TZ = True`). |
 | D15 | **Inactive courses** cannot be newly assigned or get new slots. Existing assignments are kept. |
-| D16 | **Redis is optional in development.** Without `REDIS_URL`, emails are sent synchronously right after commit, and cache and rate limits use local memory. With it, a Celery worker sends emails. |
+| D16 | **Redis is optional in development.** Without `REDIS_URL`, cache and rate limits use local memory; with it (Upstash), they are shared across server instances. Emails are sent right after commit unless `CELERY_BROKER_URL` is set, in which case a Celery worker sends them. |
 | D17 | **Emails go through a transactional outbox:** the email row is written in the same transaction as the change (student created, request decided), so an email is never sent for a change that rolled back, and never lost for one that committed. |
 | D18 | **Student photos** are stored on the server's local media folder. On free hosting this disk is temporary, so photos are a local-only feature unless S3-compatible storage is configured. `TODO(integrator):` keep or change. |
 | D19 | **Email is the login and is stored lower-case**; CNIC is also unique per student. |
@@ -546,7 +548,7 @@ Interactive docs: **`/api/v1/docs/`** (Swagger UI). Schema: `/api/v1/schema/`.
 
 ```
 backend/                     Django 5 + DRF (uv, Python 3.13)
-  config/                    settings, urls, asgi/wsgi, celery
+  config/                    settings, urls, wsgi, celery
   common/                    pagination, permissions, exceptions, audit, time, emails, rate limits, base viewset
   apps/
     accounts/                custom User, JWT cookie auth, password setup/reset tokens and endpoints
@@ -596,10 +598,10 @@ The tests prove backend enforcement of every rule (4 to 6 courses, once-only bra
 | Part | Service | Notes |
 |---|---|---|
 | Database | **Neon** (production branch) | `btree_gist` and `pg_trgm` are created by the first migration |
-| Backend | **Render** web service from `backend/` ([render.yaml](render.yaml)) | Build: `uv sync --frozen && uv run python manage.py collectstatic --noinput && uv run python manage.py migrate`. Start: `uv run gunicorn config.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT` |
+| Backend | **Render** web service from `backend/` ([render.yaml](render.yaml)) | Build: `uv sync --frozen && uv run python manage.py collectstatic --noinput && uv run python manage.py migrate`. Start: `uv run gunicorn config.wsgi:application --workers 2 --threads 4 --bind 0.0.0.0:$PORT --keep-alive 75 --timeout 60` (threaded WSGI workers serve requests in parallel; keep-alive longer than the frontend proxy's idle timeout avoids reset connections) |
 | Frontend | **Vercel**, root directory `web/` | Set `BACKEND_URL=https://<service>.onrender.com`. The `/api/*` rewrite keeps auth cookies on the Vercel origin |
 | Email | **Resend** | Set `RESEND_API_KEY` and a `MAIL_FROM` on a verified domain (or Gmail SMTP via `EMAIL_HOST*`) |
-| Redis | **Upstash** (optional) | Set `REDIS_URL` (`rediss://...`) and add a Celery worker; without it emails send inline after commit |
+| Redis | **Upstash** | Set `REDIS_URL` (`rediss://...`) for the shared cache and rate limits |
 
 Backend production variables (on Render):
 - `DEBUG=False`, `SECRET_KEY`, `JWT_SECRET` (random), `DATABASE_URL` (Neon, `sslmode=require`)
