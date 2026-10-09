@@ -22,8 +22,6 @@ services:
         value: "True"
       - key: DATABASE_URL # Neon connection string, with ?sslmode=require
         sync: false
-      - key: TEST_DB_NAME # read by settings; unused in production
-        value: test_examslot
       - key: ALLOWED_HOSTS # e.g. examslot-api.onrender.com
         sync: false
       - key: FRONTEND_URL # e.g. https://examslot.vercel.app (used in emailed links)
