@@ -1,6 +1,10 @@
-Dear {{ name }},
+{% autoescape off %}Dear {{ name }},
 
-Your request to {{ request_type }} was {{ decision }}.
-{% if remark %}Remark: {{ remark }}{% endif %}
+Your request to {{ request_type }} has been {{ decision }}.
+{% if remark %}
+Remark from the administration: {{ remark }}
+{% endif %}
+{% if approved %}{{ next_step }} You can make this change once. After that it locks again.{% else %}Nothing has changed on your account. If you still need help, you can raise a new request from the Need Help page.{% endif %}
 
-Open ExamSlot: {{ frontend_url }}
+Log in to ExamSlot: {{ frontend_url }}/login
+{% endautoescape %}
