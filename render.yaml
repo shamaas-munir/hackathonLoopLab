@@ -1,0 +1,42 @@
+# Render blueprint: ExamSlot backend (Django + DRF). Frontend is on Vercel (root directory `web/`).
+# Secrets use `sync: false`, so Render asks for them when the blueprint is created.
+services:
+  - type: web
+    name: examslot-api
+    runtime: python
+    rootDir: backend
+    plan: free
+    healthCheckPath: /api/v1/health/
+    buildCommand: uv sync --frozen && uv run python manage.py collectstatic --noinput && uv run python manage.py migrate
+    startCommand: uv run gunicorn config.asgi:application -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET
+        generateValue: true
+      - key: AUTH_COOKIE_SECURE
+        value: "True"
+      - key: DATABASE_URL # Neon connection string, with ?sslmode=require
+        sync: false
+      - key: TEST_DB_NAME # read by settings; unused in production
+        value: test_examslot
+      - key: ALLOWED_HOSTS # e.g. examslot-api.onrender.com
+        sync: false
+      - key: FRONTEND_URL # e.g. https://examslot.vercel.app (used in emailed links)
+        sync: false
+      - key: CSRF_TRUSTED_ORIGINS # e.g. https://examslot.vercel.app,https://examslot-api.onrender.com
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS # e.g. https://examslot.vercel.app
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: MAIL_FROM # sender on a domain verified in Resend
+        sync: false
+      - key: REDIS_URL # optional (Upstash rediss://...); empty = emails sent inline after commit
+        sync: false
+      - key: SEED_ADMIN_PASSWORD
+        sync: false
