@@ -4,7 +4,7 @@
 <p>Your request to <strong>{{ request_type }}</strong> has been <strong>{{ decision }}</strong>.</p>
 {% if remark %}<p style="margin:16px 0;padding:12px 16px;background:#eef3fa;border-radius:8px;"><strong>Remark from the administration:</strong><br>{{ remark|linebreaksbr }}</p>{% endif %}
 {% if approved %}
-<p>{{ next_step }} This change can be made once, after that it locks again.</p>
+<p>{{ next_step }} You can make this change once. After that it locks again.</p>
 {% else %}
 <p>Nothing has changed on your account. If you still need help, you can raise a new request from the Need Help page.</p>
 {% endif %}

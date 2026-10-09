@@ -1,7 +1,7 @@
 "use client";
 
 import { useQueryClient } from "@tanstack/react-query";
-import { CalendarRange, Pencil, Plus, Table2, Trash2 } from "lucide-react";
+import { Pencil, Plus, Trash2 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -9,19 +9,14 @@ import { DataTable, type DataTableColumn } from "@/components/data-table/DataTab
 import { ConfirmDialog } from "@/components/shared/ConfirmDialog";
 import { PageHeader } from "@/components/shared/PageHeader";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useMediaQuery } from "@/hooks/use-media-query";
 import { apiDelete } from "@/lib/api";
 import { formatDate } from "@/lib/format";
 import { SlotCapacity, SlotChosen, SlotTime } from "./SlotBits";
 import { slotsKey, type Slot } from "./types";
 import { useCourseOptions } from "./useCourseOptions";
-import { WeekView } from "./WeekView";
 
 // The form pulls in the calendar and combobox: load it only when an admin opens it.
 const SlotFormDialog = dynamic(() => import("./SlotFormDialog"), { ssr: false });
-
-type View = "table" | "week";
 
 const columns: DataTableColumn<Slot>[] = [
   {
@@ -63,9 +58,6 @@ function SlotCard({ slot }: { slot: Slot }) {
 
 export function SlotsView() {
   const queryClient = useQueryClient();
-  const isDesktop = useMediaQuery("(min-width: 768px)");
-  const [chosenView, setChosenView] = useState<View | null>(null);
-  const view = chosenView ?? (isDesktop ? "table" : "week");
   const [form, setForm] = useState<{ slot: Slot | null } | null>(null);
   const [deleting, setDeleting] = useState<Slot | null>(null);
   const { data: courses = [] } = useCourseOptions();
@@ -91,26 +83,13 @@ export function SlotsView() {
         title="Exam slots"
         description="Dates and times students can choose for each course. Chosen slots are locked."
         actions={
-          <>
-            <Tabs value={view} onValueChange={(v) => setChosenView(v as View)}>
-              <TabsList aria-label="View">
-                <TabsTrigger value="table">
-                  <Table2 aria-hidden /> Table
-                </TabsTrigger>
-                <TabsTrigger value="week">
-                  <CalendarRange aria-hidden /> Week
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-            <Button onClick={() => setForm({ slot: null })}>
-              <Plus aria-hidden /> Add slot
-            </Button>
-          </>
+          <Button onClick={() => setForm({ slot: null })}>
+            <Plus aria-hidden /> Add slot
+          </Button>
         }
       />
 
-      {view === "table" ? (
-        <DataTable
+      <DataTable
           queryKey={slotsKey}
           endpoint="/admin/slots/"
           columns={columns}
@@ -128,9 +107,6 @@ export function SlotsView() {
           emptyText="No exam slots yet"
           defaultOrdering="start_at"
         />
-      ) : (
-        <WeekView actions={actions} />
-      )}
 
       {form && (
         <SlotFormDialog

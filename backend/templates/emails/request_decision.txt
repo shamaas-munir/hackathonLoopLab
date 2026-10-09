@@ -4,7 +4,7 @@ Your request to {{ request_type }} has been {{ decision }}.
 {% if remark %}
 Remark from the administration: {{ remark }}
 {% endif %}
-{% if approved %}{{ next_step }} This change can be made once, after that it locks again.{% else %}Nothing has changed on your account. If you still need help, you can raise a new request from the Need Help page.{% endif %}
+{% if approved %}{{ next_step }} You can make this change once. After that it locks again.{% else %}Nothing has changed on your account. If you still need help, you can raise a new request from the Need Help page.{% endif %}
 
 Log in to ExamSlot: {{ frontend_url }}/login
 {% endautoescape %}
