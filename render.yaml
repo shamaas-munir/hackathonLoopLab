@@ -7,7 +7,7 @@ services:
     rootDir: backend
     plan: free
     healthCheckPath: /api/v1/health/
-    buildCommand: uv sync --frozen && uv run python manage.py collectstatic --noinput && uv run python manage.py migrate
+    buildCommand: pip install uv && uv sync --frozen && uv run python manage.py collectstatic --noinput && uv run python manage.py migrate
     startCommand: uv run gunicorn config.wsgi:application --workers 2 --threads 4 --bind 0.0.0.0:$PORT --keep-alive 75 --timeout 60
     envVars:
       - key: PYTHON_VERSION
@@ -30,11 +30,19 @@ services:
         sync: false
       - key: CORS_ALLOWED_ORIGINS # e.g. https://examslot.vercel.app
         sync: false
-      - key: RESEND_API_KEY
+      - key: EMAIL_HOST # Gmail SMTP: smtp.gmail.com (or leave empty and set RESEND_API_KEY)
+        value: smtp.gmail.com
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USE_TLS
+        value: "True"
+      - key: EMAIL_HOST_USER # the Gmail address
         sync: false
-      - key: MAIL_FROM # sender on a domain verified in Resend
+      - key: EMAIL_HOST_PASSWORD # 16-letter Gmail app password
         sync: false
-      - key: REDIS_URL # optional (Upstash rediss://...); empty = emails sent inline after commit
+      - key: MAIL_FROM # e.g. ExamSlot <you@gmail.com>
+        sync: false
+      - key: REDIS_URL # Upstash rediss://default:<token>@<host>.upstash.io:6379 (shared cache + rate limits)
         sync: false
       - key: SEED_ADMIN_PASSWORD
         sync: false
