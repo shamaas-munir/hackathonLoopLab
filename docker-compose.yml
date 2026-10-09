@@ -1,0 +1,11 @@
+# Optional dev services. Postgres runs on Neon.
+#   docker compose up -d
+#   then in backend/.env: REDIS_URL=redis://localhost:6379/0
+#   and for Mailpit: EMAIL_HOST=localhost, EMAIL_PORT=1025, EMAIL_USE_TLS=False  (inbox at http://localhost:8025)
+services:
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+  mailpit:
+    image: axllent/mailpit
+    ports: ["1025:1025", "8025:8025"]

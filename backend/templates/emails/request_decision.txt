@@ -1,0 +1,6 @@
+Dear {{ name }},
+
+Your request to {{ request_type }} was {{ decision }}.
+{% if remark %}Remark: {{ remark }}{% endif %}
+
+Open ExamSlot: {{ frontend_url }}

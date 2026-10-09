@@ -1,0 +1,3 @@
+Dear {{ name }},
+
+Your exam date sheet has been saved and locked. View it: {{ link }}

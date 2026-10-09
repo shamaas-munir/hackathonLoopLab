@@ -1,0 +1,6 @@
+{% extends "emails/base.html" %}
+{% block content %}
+<p>Dear {{ name }},</p>
+<p>Your exam date sheet has been saved and locked.</p>
+{% include "emails/_button.html" with label="View date sheet" link=link %}
+{% endblock %}

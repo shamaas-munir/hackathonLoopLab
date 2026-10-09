@@ -1,0 +1,7 @@
+{% extends "emails/base.html" %}
+{% block content %}
+<p>Dear {{ name }},</p>
+<p>An ExamSlot portal account has been created for you. Use it to choose your exam branch and design your exam date sheet.</p>
+{% include "emails/_button.html" with label="Set your password" %}
+<p>This link expires in 24 hours and can be used once.</p>
+{% endblock %}

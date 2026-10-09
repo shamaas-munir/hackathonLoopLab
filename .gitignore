@@ -1,0 +1,9 @@
+# Planning files (local only)
+BUILD_PLAN.md
+PARALLEL_PLAN.md
+CLAUDE.md
+tasks/
+docs/REQUESTS_FOR_INTEGRATOR.md
+SYSTEM_DESIGN.md
+# Secrets
+.env

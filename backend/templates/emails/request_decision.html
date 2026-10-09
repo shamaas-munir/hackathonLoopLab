@@ -1,0 +1,7 @@
+{% extends "emails/base.html" %}
+{% block content %}
+<p>Dear {{ name }},</p>
+<p>Your request to <strong>{{ request_type }}</strong> was <strong>{{ decision }}</strong>.</p>
+{% if remark %}<p>Remark from the administration: {{ remark }}</p>{% endif %}
+{% include "emails/_button.html" with label="Open ExamSlot" link=frontend_url %}
+{% endblock %}

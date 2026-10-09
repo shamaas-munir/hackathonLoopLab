@@ -1,0 +1,6 @@
+Dear {{ name }},
+
+An ExamSlot portal account has been created for you.
+
+Set your password here (expires in 24 hours, works once):
+{{ link }}
