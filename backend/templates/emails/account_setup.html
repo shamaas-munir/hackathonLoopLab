@@ -1,7 +1,9 @@
 {% extends "emails/base.html" %}
+{% block title %}Set your ExamSlot password{% endblock %}
 {% block content %}
-<p>Dear {{ name }},</p>
-<p>An ExamSlot portal account has been created for you. Use it to choose your exam branch and design your exam date sheet.</p>
+<p style="margin:0 0 16px;">Dear {{ name }},</p>
+<p style="margin:0 0 16px;">The university administration has created an ExamSlot portal account for you. Set your password to sign in, choose your exam branch and design your exam date sheet.</p>
 {% include "emails/_button.html" with label="Set your password" %}
-<p>This link expires in 24 hours and can be used once.</p>
+<p style="margin:0 0 16px;"><strong>This link expires in 24 hours and works once.</strong> If it has expired, use "Forgot password?" on the sign-in page to get a new one.</p>
+<p style="margin:0;color:#5b6b80;">If you weren't expecting this email, you can safely ignore it.</p>
 {% endblock %}

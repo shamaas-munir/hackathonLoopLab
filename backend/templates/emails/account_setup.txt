@@ -1,6 +1,13 @@
+{% autoescape off %}Virtual University · ExamSlot
+
 Dear {{ name }},
 
-An ExamSlot portal account has been created for you.
+The university administration has created an ExamSlot portal account for you. Set your password to sign in, choose your exam branch and design your exam date sheet.
 
-Set your password here (expires in 24 hours, works once):
+Set your password:
 {{ link }}
+
+This link expires in 24 hours and works once. If it has expired, use "Forgot password?" on the sign-in page to get a new one.
+
+If you weren't expecting this email, you can safely ignore it.
+{% endautoescape %}

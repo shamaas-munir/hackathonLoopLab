@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
-import { EmptyState } from "@/components/shared/EmptyState";
-import { PageHeader } from "@/components/shared/PageHeader";
+import { Suspense } from "react";
+import { AuthCardSkeleton } from "@/features/auth/AuthCard";
+import { SetPasswordFlow } from "@/features/auth/SetPasswordFlow";
 
-export const metadata: Metadata = { title: "Set password" };
+export const metadata: Metadata = { title: "Set password", referrer: "no-referrer" };
 
 export default function SetPasswordPage() {
   return (
-    <>
-      <PageHeader
-        title="Set your password"
-        description="Choose a password for your account."
-      />
-      <EmptyState title="Coming soon" description="This page is being built." />
-    </>
+    <Suspense fallback={<AuthCardSkeleton />}>
+      <SetPasswordFlow />
+    </Suspense>
   );
 }

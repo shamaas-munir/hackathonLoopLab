@@ -1,4 +1,10 @@
+import re
+
 from rest_framework import serializers
+
+from apps.accounts.tokens import RESET, SETUP
+
+PURPOSES = [SETUP, RESET]
 
 
 class LoginSerializer(serializers.Serializer):
@@ -29,3 +35,40 @@ class MeSerializer(serializers.Serializer):
 class LoginResponseSerializer(serializers.Serializer):
     role = serializers.CharField()
     redirect_to = serializers.CharField()
+
+
+class ForgotPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class MessageSerializer(serializers.Serializer):
+    message = serializers.CharField()
+
+
+class TokenSerializer(serializers.Serializer):
+    uid = serializers.CharField(max_length=64)
+    token = serializers.CharField(max_length=128)
+    purpose = serializers.ChoiceField(choices=PURPOSES)
+
+
+class ValidateTokenResponseSerializer(serializers.Serializer):
+    valid = serializers.BooleanField()
+    purpose = serializers.ChoiceField(choices=PURPOSES, required=False)
+    name = serializers.CharField(required=False)
+    email = serializers.EmailField(required=False)
+
+
+class SetPasswordSerializer(TokenSerializer):
+    password = serializers.CharField(write_only=True, trim_whitespace=False, max_length=128)
+    confirm_password = serializers.CharField(write_only=True, trim_whitespace=False, max_length=128)
+
+    def validate_password(self, value):
+        # Django's validators (length, common, numeric, similarity) run in the service, where the user is known.
+        if not (re.search(r"[A-Za-z]", value) and re.search(r"\d", value)):
+            raise serializers.ValidationError("Use at least one letter and one number.")
+        return value
+
+    def validate(self, attrs):
+        if attrs["password"] != attrs["confirm_password"]:
+            raise serializers.ValidationError({"confirm_password": "Passwords do not match."})
+        return attrs
